@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ShoesShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="admin-body-wrapper p-3">
+    <h1>Quản lí sản phẩm</h1>
+    <partial name="_StatusMessage" model="@TempData["StatusMessage"]"></partial>
+    <div class="admin-crud_create-btn">
+        <a asp-action="Create"><i class='bx bx-plus'></i> Thêm sản phẩm mới</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="col-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th class="col-2">
+                    @Html.DisplayNameFor(model => model.ImageLink)
+                </th>
+                <th class="col-2">
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th class="col-2">
+                    Số lượng
+                </th>
+                <th class="col-2">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <p class="row">@Html.DisplayFor(modelItem => item.Price) đ</p>
+                        <p class="row">Mã giảm @Html.DisplayFor(modelItem => item.Discount.Name)</p>
+                        <p class="row">@Html.DisplayFor(modelItem => item.CurrentPrice) đ</p>
+                        
+                    </td>
+                    <td>
+                        <img class="w-100" src="@Html.DisplayFor(modelItem => item.ImageLink)" alt="@Html.DisplayFor(modelItem => item.Name)" style="aspect-ratio: 1;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        <div class="row">
+                            @foreach (var productItem in item.Items)
+                            {
+                                <span class="p-1 col-6">Sz @Html.DisplayFor(modelItem => productItem.Size.Name) : @Html.DisplayFor(modelItem => @productItem.Quantity)</span>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="admin-crud-btn"><i class='tf-icons bx bx-edit'></i></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="admin-crud-btn"><i class='tf-icons bx bx-detail'></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="admin-crud-btn"><i class='tf-icons bx bx-trash '></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

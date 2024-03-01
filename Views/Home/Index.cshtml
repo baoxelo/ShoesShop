@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShoesShop.Models.Category>
+@{
+    ViewData["Title"] = "Home Page";
+    var sliders = (List<Slider>) TempData["Sliders"];
+}
+<div class="main">
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @for (var i = 0; i < sliders.Count(); i++)
+                    {
+                    <div class="carousel-item @(i==0 ? "active" : "")">
+                        <img class="h-100 w-100" src="@Html.DisplayFor(sliderItem => sliders[i].ImageLink)" alt="Image">
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-10">
+                                        <h1 class="carousel-title display-1 mb-5 animated slideInDown">@Html.DisplayFor(sliderItem => sliders[i].Title)</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+    <div class="container product-wrapper">
+        @foreach(var category in Model)
+        {
+            <h4 class="category-item-title">@Html.DisplayFor(model => category.Name)</h4>
+            <div class="product-category-wrapper row">
+                @foreach(var product in category.Products)
+                {
+                    <div class="product-item col-xl-3 col-md-4 col-6">
+                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card" >
+                            <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)"/>
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
+                                <p class="card-text">@Html.DisplayFor(productItem => product.Price) đ</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,39 @@
+﻿
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace ShoesShop.ExtensionServices
+{
+    public class ConvertSlug
+    {
+        public string ConvertString2Slug(string input)
+        {
+            // Bước 1: Loại bỏ dấu tiếng Việt
+            string str = input.ToLower();
+            str = RemoveDiacritics(str);
+
+            // Bước 2: Chuyển các khoảng trắng và ký tự đặc biệt thành gạch ngang
+            str = Regex.Replace(str, @"[^\w\s]", "");
+            str = Regex.Replace(str, @"\s+", "-");
+
+            return str;
+        }
+        static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+    } 
+}

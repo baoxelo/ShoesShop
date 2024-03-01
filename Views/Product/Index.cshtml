@@ -1,0 +1,130 @@
+﻿@model ShoesShop.Models.Product
+@{
+    ViewData["Title"] = "Index";
+    var size = ViewData["Size"] = -1;
+    var listQuantity = Model.Items.Select(q => q.Quantity).ToList();
+}
+
+<div class="container" style="padding-top: 120px; ">
+    <div class="row my-3" style=" aspect-ratio: 3; ">
+        <div class="col-6 p-4 h-100" >
+            <div class="row h-100">
+                <div class="col-4 h-100 product-list-images-wrapper" >
+                    <div class="row mb-1 justify-content-end pe-3">
+                        <img class="w-50 p-0 btn btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(image => Model.ImageLink)" alt="imageItem" />
+                    </div>
+                    @if(Model.Images != null)
+                    {
+                        @for (var i = 0; i < Model.Images.Count(); i++)
+                        {
+                            <div class="row mb-1 justify-content-end pe-3">
+                                <img class="w-50 p-0 btn btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(imageItem => Model.Images[i].ImageLink)" alt="imageItem" />
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="h-100 col-8 align-content-center ps-3">
+                    <img id="largeProductImage" class="h-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" />
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-6 p-4">
+            <div class="row">
+                <div class="product-info-wrapper">
+                    <h1 class="product-name">@Html.DisplayFor(productInfo => Model.Name)</h1>
+                    <h3 class="product-description">Mô tả : @Html.DisplayFor(productInfo => Model.Description)</h3>
+                    <span class="product-price">
+                        <span class="number-with-comma">@Html.DisplayFor(productInfo => Model.Price)</span> đ
+                    </span>
+                    <div class="productItem-list">
+                        <form asp-action="BuyProduct" method="post">
+                            <div class="form-group w-100">
+                                <h3 class="product-description">Còn lại : <span class="product-quantity">@Html.DisplayFor(firstItem => Model.Items[0].Quantity)</span></h3>
+                                <h3 class="product-description">Kích thước </h3>
+                                <input name="slug" type="hidden" value="@Html.DisplayFor(productInfo => Model.Slug)" />
+                                <select name="itemId" title="kích thước" class="form-control product-size-list w-100 p-0" value="SizeId" asp-items="ViewBag.SizeId"></select>
+                            </div>
+                            <div class="form-group w-100">
+                                <label class="product-description">Số lượng :</label>
+                                <input name="quantity" value="1" class="rounded input-quantity" type="number" min="1" max="@Html.DisplayFor(firstItem => Model.Items[0].Quantity)" inputmode="numeric" pattern="[0-9]*" />
+                            </div>
+                            <input type="submit" class="btn btn-buy mt-3" value="Mua hàng" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <!-- Include multiple-select library -->
+    <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css"/>
+    <script src="~/lib/multiple-select/multiple-select.min.js" ></script>
+
+    <!-- Include numeral.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script defer>
+        $(document).ready(function () {
+            // Init an size array included property sizeId and quantity
+            var sizeArray = [
+                @foreach(var item in Model.Items)
+                {
+                    <text>{ id: @item.SizeId, quantity: @item.Quantity },</text>
+                }
+            ]
+
+            // Apply multiple select
+            $('.product-size-list').multipleSelect({
+                single: true,
+                isOpen: true,
+                keepOpen: true,
+                
+            });
+
+            // Use jQuery to apply comma formatting every three digits
+            $('.number-with-comma').each(function () {
+                var originalNumber = $(this).text().trim();
+                var formattedNumber = numeral(originalNumber).format('0,0');
+                $(this).text(formattedNumber);
+            });
+
+            // Change the large image
+            $('.smallProductImage').click(function () {
+                var imageLink = $(this).attr("src");
+                $('#largeProductImage').attr("src", imageLink);
+            })
+
+            // Change the quantity
+            $('.product-size-list:not(.ms-parent)').change(function () {
+                var selected = $(this).val();
+
+                var selectedQuantity
+                for (var i = 0; i < sizeArray.length; i++) {
+                    if (sizeArray[i].id == selected) {
+                        selectedQuantity = sizeArray[i].quantity;
+                        break; // Kết thúc vòng lặp nếu đã tìm thấy
+                    }
+                }
+                if (selectedQuantity != 0) {
+                    $('.product-quantity').html(selectedQuantity);
+                    $('.input-quantity').attr('max', selectedQuantity);
+
+                } 
+                else 
+                {
+                    $('.product-quantity').html('<span class="text-danger">Hết hàng</span>')
+                    $('.input-quantity').attr('max', selectedQuantity);
+                    $('.input-quantity').attr('min', 0);
+                    $('.input-quantity').attr('value', 0);
+                }
+            });
+            
+        });
+    </script>
+
+
+    
+}

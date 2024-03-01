@@ -1,0 +1,28 @@
+﻿@model List<ProductImage>
+@{
+    ViewData["Title"] = "CreateProductItem";
+}
+
+<h1>Thêm ảnh mô tả sản phẩm</h1>
+<div class="row justify-content-center">
+        <form asp-action="CreateProductImage" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row justify-content-around" >
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    @Html.HiddenFor(model => Model[i].Id, Model[i].Id)
+                    @Html.HiddenFor(model => Model[i].ProductId, Model[i].ProductId)
+                    <div class="col-2 p-0 rounded" style="border: 1px solid #000;">
+                        <div class="form-group form-group-image w-100 p-0">
+                            <label for="create-product-image-@Html.DisplayFor(productImageId => Model[i].Id)" asp-for="@Model[i].ImageFile" class="control-label btn w-100 ratio-1x1" style="aspect-ratio: 1; display: block;"></label>
+                            <input onchange="mainModule.setImageToInput(this)" id="create-product-image-@Html.DisplayFor(productImageId => Model[i].Id)" type="file" asp-for="@Model[i].ImageFile" class="form-control" style="display: none;" />
+                            <span asp-validation-for="@Model[i].ImageFile" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Hoàn tất" class="btn btn-primary" />
+            </div>
+        </form>
+</div>
