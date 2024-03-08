@@ -5,6 +5,13 @@ $secondary: #adb5bd;
 $light: #F7F8FC;
 $red: #ff0000;
 $dark: #111111;
+$white: #fff;
+
+.container-wrapper {
+    margin-top: 140px;
+    margin-bottom: 60px;
+    background-color: $white;
+}
 
 .back-to-top {
     position: fixed;
@@ -29,7 +36,23 @@ $dark: #111111;
     background-size: contain;
 }
 
+.number-with-comma {
+    letter-spacing: 0.5px;
+}
 
+/*** Dropdown Bootstrap ***/
+.dropdown-toggle {
+    background-color: transparent;
+
+   
+
+    &:after {
+        display: none;
+    }
+}
+.dropdown-menu {
+    top: calc(100% + 10px) !important;
+}
 /*** Spinner ***/
 #spinner {
     opacity: 0;
@@ -61,6 +84,13 @@ $dark: #111111;
     background-color: $red;
     color: $light;
     border-radius: 0.375rem;
+
+    &:hover {
+        background-color: $red;
+        color: $light;
+        filter: brightness(0.8);
+        opacity: 0.8;
+    }
 }
 .btn-square {
     width: 38px;
@@ -101,6 +131,49 @@ $dark: #111111;
     object-fit: cover;
 }
 
+/*** Product carosel ***/
+.product-carousel {
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+
+    .product-carousel-left, .product-carousel-right {
+        font-size: 2rem;
+        border-radius: 5px;
+        border: 1px solid $secondary;
+        position: absolute;
+        z-index: 1;
+
+        &:focus {
+            box-shadow: none;
+            background-color: #1b4ea0;
+            color: $light;
+        }
+    }
+
+    .product-carousel-left {
+        top: 50%;
+        transform: translate(-100%, -50%);
+    }
+
+    .product-carousel-right {
+        top: 50%;
+        right: 0;
+        transform: translate(100%, -50%);
+    }
+
+    .product-carousel-list {
+        margin: 0;
+        padding: 0;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        /* Thanh cuộn */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
 /*** Size listbox ***/
 .product-size-list {
     visibility: hidden;

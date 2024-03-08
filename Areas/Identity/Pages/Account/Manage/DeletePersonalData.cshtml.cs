@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 
 namespace ShoesShop.Areas.Identity.Pages.Account.Manage
 {
@@ -31,6 +32,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
+            [DisplayName("Mật khẩu")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }

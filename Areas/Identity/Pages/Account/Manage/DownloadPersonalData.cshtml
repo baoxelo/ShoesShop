@@ -1,11 +1,13 @@
 ﻿@page
 @model DownloadPersonalDataModel
 @{
-    ViewData["Title"] = "Download Your Data";
+    ViewData["Title"] = "Tải thông tin cá nhân";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-<h3>@ViewData["Title"]</h3>
+<div class="container-wrapper">
+    <h3>@ViewData["Title"]</h3>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

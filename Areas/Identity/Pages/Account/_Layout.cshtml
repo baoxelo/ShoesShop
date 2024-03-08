@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div class="container container-wrapper">
+    <div class="row">
+        <h1>đăng nhập</h1>
+        <div class="container container-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

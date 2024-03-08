@@ -1,11 +1,11 @@
 ﻿@model ShoesShop.Models.Product
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sản phẩm";
     var size = ViewData["Size"] = -1;
     var listQuantity = Model.Items.Select(q => q.Quantity).ToList();
 }
 
-<div class="container" style="padding-top: 120px; ">
+<div class="container container-wrapper" >
     <div class="row my-3" style=" aspect-ratio: 3; ">
         <div class="col-6 p-4 h-100" >
             <div class="row h-100">
@@ -32,7 +32,7 @@
         <div class="col-6 p-4">
             <div class="row">
                 <div class="product-info-wrapper">
-                    <h1 class="product-name">@Html.DisplayFor(productInfo => Model.Name)</h1>
+                    <h1 class="product-name p-0">@Html.DisplayFor(productInfo => Model.Name)</h1>
                     <h3 class="product-description">Mô tả : @Html.DisplayFor(productInfo => Model.Description)</h3>
                     <span class="product-price">
                         <span class="number-with-comma">@Html.DisplayFor(productInfo => Model.Price)</span> đ
@@ -49,10 +49,34 @@
                                 <label class="product-description">Số lượng :</label>
                                 <input name="quantity" value="1" class="rounded input-quantity" type="number" min="1" max="@Html.DisplayFor(firstItem => Model.Items[0].Quantity)" inputmode="numeric" pattern="[0-9]*" />
                             </div>
-                            <input type="submit" class="btn btn-buy mt-3" value="Mua hàng" />
+                            <input type="submit" class="btn btn-buy buyProduct-btn mt-3" value="Mua hàng" />
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="px-3">
+            <h5 class="category-item-title">Sản phẩm liên quan</h5>
+            <hr />
+        </div>
+        <div class="row product-carousel">
+            <button class="btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+            <button class="btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+            <div class="row product-carousel-list">
+                @foreach (var product in Model.Category.Products)
+                {
+                    <div class="product-item col-xl-3 col-md-4 col-6 px-3">
+                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card">
+                            <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)" />
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
+                                <span class="card-text"><span class="number-with-comma">@Html.DisplayFor(productItem => product.Price)</span> đ</span>
+                            </div>
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -64,8 +88,6 @@
     <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css"/>
     <script src="~/lib/multiple-select/multiple-select.min.js" ></script>
 
-    <!-- Include numeral.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script defer>
         $(document).ready(function () {
             // Init an size array included property sizeId and quantity
@@ -84,12 +106,7 @@
                 
             });
 
-            // Use jQuery to apply comma formatting every three digits
-            $('.number-with-comma').each(function () {
-                var originalNumber = $(this).text().trim();
-                var formattedNumber = numeral(originalNumber).format('0,0');
-                $(this).text(formattedNumber);
-            });
+            
 
             // Change the large image
             $('.smallProductImage').click(function () {
@@ -111,6 +128,7 @@
                 if (selectedQuantity != 0) {
                     $('.product-quantity').html(selectedQuantity);
                     $('.input-quantity').attr('max', selectedQuantity);
+                    $('.buyProduct-btn').prop('disabled', false);
 
                 } 
                 else 
@@ -119,6 +137,8 @@
                     $('.input-quantity').attr('max', selectedQuantity);
                     $('.input-quantity').attr('min', 0);
                     $('.input-quantity').attr('value', 0);
+                    $('.input-quantity').val(0);
+                    $('.buyProduct-btn').prop('disabled',true);
                 }
             });
             

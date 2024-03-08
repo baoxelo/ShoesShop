@@ -4,7 +4,7 @@
     // Spinner
     var spinner = function () {
         setTimeout(function () {
-            if (($('#spinner').length) > 0) {
+            if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
         }, 1);
@@ -73,7 +73,25 @@
             }
         }
     });
+    // Use jQuery to apply comma formatting every three digits
+    $('.number-with-comma').each(function () {
+        var originalNumber = $(this).text().trim();
+        var formattedNumber = numeral(originalNumber).format('0,0');
+        $(this).text(formattedNumber);
+    });
 
+    // Carosel product
+    $('.product-carousel-left').click(function () {
+        var width = $(this).closest('.product-carousel').find('.product-item').first().outerWidth();
+        $(this).closest('.product-carousel').find('.product-carousel-list').animate({ scrollLeft: '-=' + width }, 400);
+    });
+    $('.product-carousel-right').click(function () {
+        var width = $(this).closest('.product-carousel').find('.product-item').first().outerWidth();
+        $(this).closest('.product-carousel').find('.product-carousel-list').animate({ scrollLeft: '+=' + width }, 400);
+    });
     
-})();
+
+})(jQuery);
+
+
 

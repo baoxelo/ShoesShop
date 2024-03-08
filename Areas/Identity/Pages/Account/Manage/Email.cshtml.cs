@@ -46,7 +46,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "Email đăng nhập mới")]
             public string NewEmail { get; set; }
         }
 
@@ -102,14 +102,14 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Xác thực Email đăng nhập SHOES SHOP",
+                    $"Để xác thực email đăng nhập click <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>vào đây</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Email xác minh đã được gửi. Vui lòng kiểm tra hộp thư của bạn.";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Không thể thay đổi email.";
             return RedirectToPage();
         }
 
@@ -138,10 +138,10 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Xác thực Email đăng nhập SHOES SHOP",
+                $"Để xác thực email đăng nhập click <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>vào đây</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Email xác minh đã được gửi. Vui lòng kiểm tra hộp thư của bạn.";
             return RedirectToPage();
         }
     }

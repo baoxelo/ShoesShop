@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ShoesShop.Models
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    var cart = (Cart)TempData["Cart"];
+    double totalPrice = 0;
+}
+
+
+<div class="btn-sm-square bg-white ms-3 dropdown">
+    @{
+        // Get ID and user
+        var userId = UserManager.GetUserId(User);
+        var user = await UserManager.FindByIdAsync(userId);
+        if (user != null && !string.IsNullOrEmpty(user.Avatar))
+        {
+                <button title="Giỏ hàng" class="rounded-circle h-100 w-100 border-0 dropdown-toggle p-0" type="button" id="dropdownCartToggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="fa fa-shopping-bag text-body"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end cart-partial row" aria-labelledby="dropdownCartToggle">
+                    <h6 class="text-center cartPartial-heading">Giỏ hàng</h6>
+                    <ul class="p-0 m-0 cartPartial-list">
+                        @if(cart != null && cart.CartItems != null)
+                    {
+                        
+                        foreach (var item in cart.CartItems)
+                        {
+                                <li class="row m-0 cartPartial-item">
+                                    <div class="col-4 p-3">
+                                        <img class="w-100 h-100 image-wrapper" src="@Html.DisplayFor(product => item.ProductItem.Product.ImageLink)" alt="anhsanpham" />
+                                    </div>
+                                    <div class="col-8 p-3">
+                                        <div class="row">
+                                            <p class="cartPartial-item-name">@Html.DisplayFor(product => item.ProductItem.Product.Name)</p>
+                                            <p class="cartPartial-item-size">Size : @Html.DisplayFor(product => item.ProductItem.Size.Name)</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-6 cartPartial-item-quantity">Số lượng @Html.DisplayFor(product => item.Quantity)</p>
+                                            @{
+                                            var discountPrice = item.ProductItem.Product.CurrentPrice * item.Quantity;
+                                            var itemPrice = item.ProductItem.Product.Price * item.Quantity;
+                                            totalPrice += discountPrice ?? 0;
+                                            }
+                                            <div class="col-6">
+                                                <p class="cartPartial-item-discountPrice"><span class="number-with-comma">@Html.DisplayFor(product => discountPrice)</span> đ</p>
+                                                <p class="text-decoration-line-through cartPartial-item-price"><span class="number-with-comma">@Html.DisplayFor(product => itemPrice)</span> đ</p>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+
+                                </li>
+
+                        }
+                    }
+                    </ul>
+                    <div class="row cartPartial-totalPrice text-end">
+                    <span>Tổng giá : <span class="number-with-comma">@Html.DisplayFor(total => totalPrice)</span> đ</span>
+                    </div>
+                </div>
+        }
+        else
+        {
+                <a class="btn-sm-square bg-white rounded-circle" asp-area="Identity" asp-page="/Account/Login">
+                    <span class="fa fa-shopping-bag text-body"></span>
+                </a>
+        }
+    }
+    
+</div>

@@ -1,0 +1,40 @@
+﻿@model ShoesShop.Models.Cart
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="cartPage-wrapper container container-wrapper p-4">
+    <div class="row ">
+        <div class="cartPage-list col-8 rounded border-1">
+            <h4>Giỏ hàng của bạn</h4>
+            <hr/>
+            @if(Model.CartItems.Count <= 0)
+            {
+                <p>Bạn không có sản phẩm nào trong giỏ hàng</p>
+            }
+            else
+            {
+                <p>Bạn đang có @Html.DisplayFor(quantity => Model.CartItems.Count) sản phẩm trong giỏ hàng</p>
+                @for (var i = 0; i < Model.CartItems.Count(); i++)
+                {
+                    <div class="cartPage-cartItem">
+                        <h5>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Name)</h5>
+                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.CurrentPrice)</p>
+                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Price)</p>
+                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Size.Name)</p>
+                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].Quantity)</p>
+                        @{
+                            var itemPrice = Model.CartItems[i].ProductItem.Product.CurrentPrice * Model.CartItems[i].Quantity;
+                        }
+                        <p>@Html.DisplayFor(itemInfo => itemPrice)</p>
+
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-4">
+            <h4>Thông tin đơn hàng</h4>
+
+        </div>
+    </div>
+</div>

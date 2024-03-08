@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang Chủ";
     var sliders = (List<Slider>) TempData["Sliders"];
 }
 <div class="main">
@@ -38,24 +38,37 @@
         </div>
     </div>
     <!-- Carousel End -->
-    <div class="container product-wrapper">
+    <div class="container product-wrapper py-5 mt-5">
+        <h2 class="text-center pb-4 text-uppercase">Sản phẩm của chúng tôi</h2>
+
         @foreach(var category in Model)
         {
-            <h4 class="category-item-title">@Html.DisplayFor(model => category.Name)</h4>
-            <div class="product-category-wrapper row">
-                @foreach(var product in category.Products)
-                {
-                    <div class="product-item col-xl-3 col-md-4 col-6">
-                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card" >
-                            <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)"/>
-                            <div class="card-body">
-                                <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
-                                <p class="card-text">@Html.DisplayFor(productItem => product.Price) đ</p>
+            if( category.Products != null && category.Products.Count() > 0)
+            {
+                <div class="px-3">
+                    <h5 class="category-item-title">@Html.DisplayFor(model => category.Name)</h5>
+                    <hr />
+                </div>
+                <div class="row product-carousel">
+                    <button title="product-carousel-left" class="btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                    <button title="product-carousel-right" class="btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                    <div class="row product-carousel-list">
+                        @foreach (var item in category.Products)
+                        {
+                            <div class="product-item col-xl-3 col-md-4 col-6 px-3">
+                                <a asp-controller="Product" asp-action="Index" asp-route-slug="@item.Slug" class="product-card card">
+                                    <img src="@Html.DisplayFor(productItem => item.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => item.Name)" />
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Html.DisplayFor(productItem => item.Name)</h5>
+                                        <span class="card-text"><span class="number-with-comma">@Html.DisplayFor(productItem => item.Price)</span> đ</span>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        }
                     </div>
-                }
-            </div>
+                </div>
+            }
+            
         }
     </div>
 

@@ -4,6 +4,7 @@ $light: #F7F8FC;
 $dark: #111111;
 $title: #252a2b;
 $red: #ff0000;
+$white: #fff;
 
 html {
     font-size: 14px;
@@ -25,7 +26,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    background-color: #f5f5f5;
 }
 
 a {
@@ -54,6 +55,12 @@ a {
 
         .card-img-top {
             aspect-ratio: 1/1;
+        }
+
+        &:hover {
+            .card-img-top {
+                filter: brightness(0.8);
+            }
         }
     }
 }
@@ -109,4 +116,70 @@ a {
 }
 #product-size-wrapper {
     background-color: none;
+}
+
+// Cart Partial
+.cart-partial {
+    width: 420px;
+    box-shadow: 1px 1px 1px #ccc;
+    padding-bottom: 0;
+
+    .cartPartial-list {
+        max-height: 420px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            width: 5px; /* Điều này có thể thay đổi tùy thuộc vào yêu cầu của bạn */
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #888; /* Màu sắc của thanh cuộn */
+        }
+
+        &::-webkit-scrollbar-button {
+            display: none; /* Ẩn mũi tên lên và mũi tên xuống */
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #888; /* Màu sắc của thanh cuộn */
+            border-radius: 5px;
+        }
+    }
+
+    .cartPartial-item {
+        border-bottom: 1px solid #ddd;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .cartPartial-heading {
+        font-weight: 400;
+        margin-bottom: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .cartPartial-item-name, .cartPartial-item-quantity, .cartPartial-item-size, .cartPartial-item-discountPrice, .cartPartial-item-price, .cartPartial-totalPrice {
+        margin: 0;
+        font-family: "Times New Roman";
+    }
+
+    .cartPartial-item-name {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .cartPartial-totalPrice {
+        padding: 10px 20px;
+        margin: 0;
+        border-top: 1px solid #ccc;
+    }
+}
+
+//*** Cart Page ***//
+.cartPage-wrapper {
+    background-color: #f5f5f5;
 }

@@ -1,4 +1,10 @@
 ﻿@charset "UTF-8";
+.container-wrapper {
+  margin-top: 140px;
+  margin-bottom: 60px;
+  background-color: #fff;
+}
+
 .back-to-top {
   position: fixed;
   display: none;
@@ -20,6 +26,22 @@
 .bg-icon {
   background: url(../img/bg-icon.png) center center repeat;
   background-size: contain;
+}
+
+.number-with-comma {
+  letter-spacing: 0.5px;
+}
+
+/*** Dropdown Bootstrap ***/
+.dropdown-toggle {
+  background-color: transparent;
+}
+.dropdown-toggle:after {
+  display: none;
+}
+
+.dropdown-menu {
+  top: calc(100% + 10px) !important;
 }
 
 /*** Spinner ***/
@@ -53,6 +75,12 @@
   background-color: #ff0000;
   color: #F7F8FC;
   border-radius: 0.375rem;
+}
+.btn-buy:hover {
+  background-color: #ff0000;
+  color: #F7F8FC;
+  filter: brightness(0.8);
+  opacity: 0.8;
 }
 
 .btn-square {
@@ -93,6 +121,44 @@
   border-radius: 0.375rem;
   aspect-ratio: 1;
   object-fit: cover;
+}
+
+/*** Product carosel ***/
+.product-carousel {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.product-carousel .product-carousel-left, .product-carousel .product-carousel-right {
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 1px solid #adb5bd;
+  position: absolute;
+  z-index: 1;
+}
+.product-carousel .product-carousel-left:focus, .product-carousel .product-carousel-right:focus {
+  box-shadow: none;
+  background-color: #1b4ea0;
+  color: #F7F8FC;
+}
+.product-carousel .product-carousel-left {
+  top: 50%;
+  transform: translate(-100%, -50%);
+}
+.product-carousel .product-carousel-right {
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+}
+.product-carousel .product-carousel-list {
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  /* Thanh cuộn */
+}
+.product-carousel .product-carousel-list::-webkit-scrollbar {
+  display: none;
 }
 
 /*** Size listbox ***/
