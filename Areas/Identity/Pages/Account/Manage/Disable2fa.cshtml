@@ -6,24 +6,21 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="container-wrapper">
-    <h3>@ViewData["Title"]</h3>
+<h3>@ViewData["Title"]</h3>
 
-    <div class="alert alert-warning" role="alert">
-        <p>
-            <strong>Hành động này chỉ vô hiệu hóa xác thực hai yếu tố 2FA.</strong>
-        </p>
-        <p>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <strong>Hành động này chỉ vô hiệu hóa xác thực hai yếu tố 2FA.</strong>
+    </p>
+    <p>
 
-            Vô hiệu hóa 2FA không làm thay đổi các khóa được sử dụng trong ứng dụng xác thực. 
-            Nếu bạn muốn thay đổi khóa được sử dụng trong ứng dụng xác thực, bạn nên  <a asp-page="./ResetAuthenticator">đặt lại mã xác thực.</a>
-        </p>
-    </div>
+        Vô hiệu hóa 2FA không làm thay đổi các khóa được sử dụng trong ứng dụng xác thực. 
+        Nếu bạn muốn thay đổi khóa được sử dụng trong ứng dụng xác thực, bạn nên  <a asp-page="./ResetAuthenticator">đặt lại mã xác thực.</a>
+    </p>
+</div>
 
-    <div>
-        <form method="post">
-            <button class="btn btn-danger" type="submit">Vô hiệu hóa</button>
-        </form>
-    </div>
-
+<div>
+    <form method="post">
+        <button class="btn btn-danger" type="submit">Vô hiệu hóa</button>
+    </form>
 </div>

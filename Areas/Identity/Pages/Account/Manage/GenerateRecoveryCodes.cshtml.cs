@@ -59,14 +59,14 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             if (!isTwoFactorEnabled)
             {
-                throw new InvalidOperationException($"Cannot generate recovery codes for user with ID '{userId}' as they do not have 2FA enabled.");
+                throw new InvalidOperationException($"Không thể tạo mã khôi phục cho người dùng có ID '{userId}' vì họ không bật tính năng xác thực hai yếu tố (2FA).");
             }
 
             var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             RecoveryCodes = recoveryCodes.ToArray();
 
-            _logger.LogInformation("User with ID '{UserId}' has generated new 2FA recovery codes.", userId);
-            StatusMessage = "You have generated new recovery codes.";
+            _logger.LogInformation("Người dùng với ID '{UserId}' đã tạo mã khôi phục 2FA mới.", userId);
+            StatusMessage = "Bạn đã tạo mã khôi phục mới.";
             return RedirectToPage("./ShowRecoveryCodes");
         }
     }

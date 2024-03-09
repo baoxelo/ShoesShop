@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\Identity\Pages\Account\_Layout.cshtml" />
-    <Content Remove="Areas\Identity\Pages\Account\_ViewStart.cshtml" />
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -75,7 +73,6 @@
     <None Include="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
     <None Include="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
@@ -84,7 +81,6 @@
     <None Include="Areas\Identity\Pages\Account\_Layout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\_ViewStart.cshtml" />
     <None Include="Areas\Identity\Pages\Error.cshtml" />
     <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
