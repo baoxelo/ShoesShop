@@ -9,70 +9,73 @@
 {
     <partial name="/Area/Identity/Pages/Account/_StatusMessage.cshtml" model="information" />
 }
-<div class="container">
-    <div class="mt-5 row bg-white rounded">
-        <div class="col-md-4">
-            <section>
-                <form id="account" method="post">
-                    <h2>Đăng nhập bằng tài khoản Shoes shop</h2>
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Input.Email" class="form-label">Email đăng nhập</label>
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
-                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="checkbox mb-3">
-                        <label asp-for="Input.RememberMe" class="form-label">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                    <div>
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mb-2">Đăng nhập</button>
-                    </div>
-                    @{
-                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                        {
-                            <div>
-                            </div>
-                        }
-                        else
-                        {
-                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                <div>
-                                    <p>
-                                        @foreach (var provider in Model.ExternalLogins!)
-                                        {
-                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                        }
-                                    </p>
-                                </div>
-                            </form>
-                        }
-                    }
-                    <div>
-                        <p>
-                            <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu ?</a>
-                        </p>
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng kí</a>
-                        </p>
-                        <p>
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Gửi lại email xác thực</a>
-                        </p>
-                    </div>
-                </form>
 
-            </section>
-        </div>
-        
+<form class="row" id="account" method="post">
+    <h2>Đăng nhập</h2>
+    <hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="form-group mb-3">
+        <label asp-for="Input.Email" class="form-label">Email đăng nhập</label>
+        <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
     </div>
+    <div class="form-group mb-3">
+        <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
+        <input asp-for="Input.Password" class="form-control" aria-required="true" placeholder="password" />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+    <div class="checkbox mb-3">
+        <label asp-for="Input.RememberMe" class="form-label">
+            <input class="form-check-input" asp-for="Input.RememberMe" />
+            @Html.DisplayNameFor(m => m.Input.RememberMe)
+        </label>
+    </div>
+    <div>
+        <button title="Đăng nhập" id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mb-2">Đăng nhập</button>
+    </div>
+</form>
+<div class="row">
+    <div class="col-7 py-1">
+        <p class="m-0 p-1" style="font-size: 1rem">
+            <a class="text-dark" id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu</a>
+        </p>
+        <p class="m-0 p-1" style="font-size: 1rem">
+            <a class="text-dark" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng kí</a>
+        </p>
+        <p class="m-0 p-1" style="font-size: 1rem">
+            <a class="text-dark" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Gửi lại email xác thực</a>
+        </p>
+    </div>
+    @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+            <div class="col-5">
+            </div>
+        }
+        else
+        {
+            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal col-5">
+                <div class="text-end">
+                    <p>
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit" class="btn" name="provider" value="@provider.Name" title="Đăng nhập với @provider.DisplayName account">
+                                <i class="fa-brands fa-google me-1"></i>
+                                <span style="white-space: nowrap; letter-spacing: -1.5px;">
+                                    <span style="color: dodgerblue">G</span>
+                                    <span style="color: red">o</span>
+                                    <span style="color: #FFD700">o</span>
+                                    <span style="color: dodgerblue">g</span>
+                                    <span style="color: green">l</span>
+                                    <span style="color: red">e</span>
+                                </span>
+                            </button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    }
 </div>
 
 @section Scripts {

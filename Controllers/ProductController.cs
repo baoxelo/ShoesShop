@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ShoesShop.ExtensionServices;
 using ShoesShop.Models;
 using System.Security.Claims;
@@ -93,7 +94,11 @@ namespace ShoesShop.Controllers
             var slug = Convert.ToString(form["slug"]);
             var quantity = Convert.ToInt32(form["quantity"]);
             var sizeId = Convert.ToInt32(form["itemId"]);
-
+            if (string.IsNullOrEmpty(slug) || quantity == 0 || sizeId == 0)
+            {
+                ModelState.AddModelError("", "Vui lòng nhập số lượng.");
+                return RedirectToAction("Index", new { slug });
+            }
             var product = await _context.Products.FirstOrDefaultAsync(q => q.Slug == slug);
             if(product == null)
             {
@@ -124,6 +129,7 @@ namespace ShoesShop.Controllers
                 productItem.Quantity -= quantity;
                 cart.TotalPrice = quantity * product.CurrentPrice ?? 0;
                 await _context.SaveChangesAsync();
+                TempData["ShowCart"] = true;
                 return RedirectToAction("Index", new { slug });
 
             }

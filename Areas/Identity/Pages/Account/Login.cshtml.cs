@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ShoesShop.Models;
 using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShoesShop.Areas.Identity.Pages.Account
 {
@@ -31,6 +32,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
+        public string? Slide {  get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -97,12 +99,12 @@ namespace ShoesShop.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Taì khoản đã bị khóa");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Tài khoản hoặc mật khẩu không chính xác");
                     return Page();
                 }
             }

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShoesShop.Areas.Identity.Pages.Account
 {
@@ -36,6 +37,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
         }
+
 
         [BindProperty]
         public InputModel Input { get; set; }

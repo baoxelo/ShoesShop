@@ -17,7 +17,7 @@ namespace ShoesShop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -328,9 +328,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5324),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7167),
                             Description = "Giày Boot da chất lượng cao sản xuất tại Việt Nam",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5336),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7178),
                             Name = "Giày Boot",
                             Slug = "giay-boot",
                             Status = "Hoạt động"
@@ -338,9 +338,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5338),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7181),
                             Description = "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5339),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7181),
                             Name = "Giày thể thao",
                             Slug = "giay-the-thao",
                             Status = "Hoạt động"
@@ -385,9 +385,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5524),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7363),
                             Description = "Không giảm",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5525),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7364),
                             Name = "00%",
                             Percent = 0,
                             Status = "Hoạt động"
@@ -395,9 +395,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5527),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7365),
                             Description = "Giảm 20%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5528),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7366),
                             Name = "20%",
                             Percent = 20,
                             Status = "Hoạt động"
@@ -405,9 +405,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5529),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7367),
                             Description = "Giảm 30%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5529),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7368),
                             Name = "30%",
                             Percent = 30,
                             Status = "Hoạt động"
@@ -415,9 +415,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5531),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7369),
                             Description = "Giảm 40%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5531),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7369),
                             Name = "40%",
                             Percent = 40,
                             Status = "Hoạt động"
@@ -425,9 +425,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5534),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7371),
                             Description = "Giảm 50%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5534),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7371),
                             Name = "50%",
                             Percent = 50,
                             Status = "Hoạt động"
@@ -435,9 +435,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5535),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7372),
                             Description = "Giảm 60%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5536),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7373),
                             Name = "60%",
                             Percent = 60,
                             Status = "Hoạt động"
@@ -445,9 +445,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5537),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7374),
                             Description = "Giảm 70%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5538),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7375),
                             Name = "70%",
                             Percent = 70,
                             Status = "Hoạt động"
@@ -455,9 +455,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5539),
+                            CreateDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7376),
                             Description = "Giảm 80%",
-                            ModifyDate = new DateTime(2024, 2, 27, 17, 7, 26, 832, DateTimeKind.Local).AddTicks(5539),
+                            ModifyDate = new DateTime(2024, 3, 15, 18, 20, 19, 859, DateTimeKind.Local).AddTicks(7376),
                             Name = "80%",
                             Percent = 80,
                             Status = "Hoạt động"
@@ -511,15 +511,37 @@ namespace ShoesShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("TotalPrice")
+                    b.Property<string>("CustomerName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("DateOrdered")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceCode")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("TotalPrice")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Invoice");
                 });
@@ -548,6 +570,51 @@ namespace ShoesShop.Migrations
                     b.HasIndex("ProductItemId");
 
                     b.ToTable("InvoiceItem");
+                });
+
+            modelBuilder.Entity("ShoesShop.Models.InvoiceStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InvoiceStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Chúng tôi sẽ sớm liên hệ với bạn",
+                            Status = "Đang chờ xác nhận"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Đơn hàng đang được vận chuyển đến bạn",
+                            Status = "Đang giao"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Đơn hàng đã được hoàn tất",
+                            Status = "Hoàn tất"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Đơn hàng đã bị hủy",
+                            Status = "Đơn hàng bị hủy"
+                        });
                 });
 
             modelBuilder.Entity("ShoesShop.Models.Product", b =>
@@ -860,7 +927,15 @@ namespace ShoesShop.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
+                    b.HasOne("ShoesShop.Models.InvoiceStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("ShoesShop.Models.InvoiceItem", b =>

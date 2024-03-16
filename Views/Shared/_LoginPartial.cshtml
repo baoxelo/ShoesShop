@@ -25,10 +25,11 @@
             }
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAvatar">
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
-            <li>
+            <li class="dropdown-item"><a asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
+            <li class="dropdown-item"><a asp-controller="Invoice" asp-action="Index">Đơn hàng của bạn</a></li>
+            <li class="dropdown-item">
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button id="logout" type="submit" class=" btn">Đăng xuất</button>
+                    <input id="logout" type="submit" class="text-danger border-0 w-100 bg-transparent text-start p-0" title="Đăng xuất" value="Đăng xuất"/>
                 </form>
             </li>
 

@@ -56,6 +56,17 @@ app.MapControllerRoute(
     defaults: new {controller = "Home", action = "Index" }
     );
 
+app.MapControllerRoute(
+    name: "home",
+    pattern: "/gio-hang/{action}/{id?}",
+    defaults: new { controller = "Cart", action = "Index" }
+    );
+
+app.MapControllerRoute(
+    name: "home",
+    pattern: "/don-hang/{action}/{id?}",
+    defaults: new { controller = "Invoice", action = "Index" }
+    );
 
 app.MapControllerRoute(
     name: "product",

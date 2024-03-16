@@ -129,13 +129,8 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
+                                <a asp-area="Admin" asp-controller="Customer" asp-action="Index" class="menu-link">
                                     <div data-i18n="Navbar">Khách hàng</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Navbar">Hàng hóa</div>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -148,6 +143,12 @@
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Quản lí cửa hàng</span>
+                    </li>
+                    <li class="menu-item @((ViewData["MenuBar"] as string == "Invoices") ? "active" : "")">
+                        <a asp-area="Admin" asp-controller="Invoices" asp-action="" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-package"></i>
+                            <div data-i18n="Navbar">Đơn hàng</div>
+                        </a>
                     </li>
                     <li class="menu-item @((ViewData["MenuBar"] as string == "Products") ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Products" asp-action="" class="menu-link">
@@ -372,63 +373,10 @@
                             </li>
 
                             <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt="ava" class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt="ava" class="w-px-40 h-auto rounded-circle" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+
+                            <div class="d-none d-lg-flex ms-2" style="height: 50px; width: 50px">
+                                <partial name="_LoginPartial"></partial>
+                            </div>
                             <!--/ User -->
                         </ul>
                     </div>
@@ -455,9 +403,9 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="~/admin/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/admin/vendor/libs/popper/popper.js"></script>
-    <script src="~/admin/vendor/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="~/admin/vendor/js/menu.js"></script>
     <!-- endbuild -->
@@ -465,8 +413,7 @@
     <script src="~/admin/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admin/js/main.js" asp-append-version="true"></script>
     <script src="~/admin/js/site.js" asp-append-version="true"></script>
 
     <!-- Page JS -->

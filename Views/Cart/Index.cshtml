@@ -3,38 +3,94 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="cartPage-wrapper container container-wrapper p-4">
+<div class="cartPage-wrapper container">
     <div class="row ">
-        <div class="cartPage-list col-8 rounded border-1">
-            <h4>Giỏ hàng của bạn</h4>
-            <hr/>
-            @if(Model.CartItems.Count <= 0)
-            {
-                <p>Bạn không có sản phẩm nào trong giỏ hàng</p>
-            }
-            else
-            {
-                <p>Bạn đang có @Html.DisplayFor(quantity => Model.CartItems.Count) sản phẩm trong giỏ hàng</p>
-                @for (var i = 0; i < Model.CartItems.Count(); i++)
+        <div class="col-8">
+            <div class="container-wrapper rounded px-4 py-3 cartPage-list ">
+                <h4>Giỏ hàng của bạn</h4>
+                <hr />
+                @if (Model.CartItems == null || Model.CartItems.Count() == 0)
                 {
-                    <div class="cartPage-cartItem">
-                        <h5>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Name)</h5>
-                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.CurrentPrice)</p>
-                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Price)</p>
-                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Size.Name)</p>
-                        <p>@Html.DisplayFor(itemInfo => Model.CartItems[i].Quantity)</p>
-                        @{
-                            var itemPrice = Model.CartItems[i].ProductItem.Product.CurrentPrice * Model.CartItems[i].Quantity;
-                        }
-                        <p>@Html.DisplayFor(itemInfo => itemPrice)</p>
-
-                    </div>
+                    <p>Bạn không có sản phẩm nào trong giỏ hàng</p>
                 }
-            }
+                else
+                {
+                    <p class="mb-3">Bạn đang có @Html.DisplayFor(quantity => Model.CartItems.Count) sản phẩm trong giỏ hàng</p>
+                    @for (var i = 0; i < Model.CartItems.Count(); i++)
+                    {
+                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@Model.CartItems[i].ProductItem.Product.Slug" class="row cartPage-cartItem m-0 mb-3">
+                            <div class="col-2 p-3">
+                                    <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.ImageLink)" alt="hinhsanpham" />
+                             
+                            </div>
+                            <div class="col-10 align-content-center">
+                                <div class="row p-2">
+                                    <h5 class="m-0 p-0">@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Name)</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p><span class="number-with-comma">@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.CurrentPrice)</span> đ</p>
+                                        @if (Model.CartItems[i].ProductItem.Product.Discount.Percent != null && Model.CartItems[i].ProductItem.Product.Discount.Percent != 0)
+                                        {
+                                            <p class="text-decoration-line-through"><span class="number-with-comma">@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Price)</span> đ</p>
+                                        }
+                                    </div>
+                                    <div class="col-2"><p class="">Size : @Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Size.Name)</p></div>
+                                    <div class="col-3">
+                                        <p>Số lượng : @Html.DisplayFor(itemInfo => Model.CartItems[i].Quantity)</p>
+                                    </div>
+                                    <div class="col-4">
+                                        @{
+                                            var itemPrice = Model.CartItems[i].ProductItem.Product.CurrentPrice * Model.CartItems[i].Quantity;
+                                        }
+                                        <p>Tổng giá : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </a>
+                    }
+                }
+            </div>
+            
         </div>
         <div class="col-4">
-            <h4>Thông tin đơn hàng</h4>
+            <div class="container-wrapper rounded px-4 py-3">
+                <h4>Thông tin đơn hàng</h4>
+                <hr />
+                <div class="row">
+                    <form asp-controller="Cart" asp-action="CheckOut">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Tên người nhận</label>
+                            <input name="CustomerName" placeholder="Tên người nhận hàng" class="form-control" required/>
 
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Số điện thoại liên hệ</label>
+                            <input name="PhoneNumber" placeholder="Nhập số điện thoại" class="form-control" required />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Địa chỉ</label>
+                            <input name="Address" placeholder="Địa chỉ giao hàng" class="form-control" required />
+                        </div>
+                        @{
+                            double totalPayment = 0;
+                            Model.CartItems.ForEach(item =>
+                            {
+                                totalPayment += (item.ProductItem.Product.CurrentPrice * item.Quantity) ?? 0;
+                            });
+                        }
+                        <label class="form-label">Tổng tiền : <span class="number-with-comma fw-bold">@Html.DisplayFor(payment => totalPayment)</span> đ</label>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Phương thức giao hàng</label>
+                            <input name="PaymentMethod" placeholder="Địa chỉ giao hàng" value="Thanh toán khi nhận hàng" class="form-control" disabled/>
+                        </div>
+                        <label class="form-label">Phí trên chưa bao gồm chi phí vận chuyển, để biết thêm liên hệ : +079 899 1358</label>
+                        <input type="submit" class="w-100 btn btn-lg btn-danger mt-2" value="Đặt hàng" />
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

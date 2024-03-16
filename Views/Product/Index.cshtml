@@ -11,20 +11,25 @@
             <div class="row h-100">
                 <div class="col-4 h-100 product-list-images-wrapper" >
                     <div class="row mb-1 justify-content-end pe-3">
-                        <img class="w-50 p-0 btn btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(image => Model.ImageLink)" alt="imageItem" />
+                       <div class="col-6 p-0">
+                            <img class="w-100 btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(image => Model.ImageLink)" alt="imageItem" />
+                       </div>
                     </div>
                     @if(Model.Images != null)
                     {
                         @for (var i = 0; i < Model.Images.Count(); i++)
                         {
                             <div class="row mb-1 justify-content-end pe-3">
-                                <img class="w-50 p-0 btn btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(imageItem => Model.Images[i].ImageLink)" alt="imageItem" />
+                                <div class="col-6 p-0">
+                                    <img class="w-100 btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(imageItem => Model.Images[i].ImageLink)" alt="imageItem" />
+
+                                </div>
                             </div>
                         }
                     }
                 </div>
                 <div class="h-100 col-8 align-content-center ps-3">
-                    <img id="largeProductImage" class="h-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" />
+                    <img id="largeProductImage" class="h-100 w-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" type="button" data-bs-toggle="modal" data-bs-target="#zoomProductImage" />
                 </div>
                 
             </div>
@@ -56,32 +61,46 @@
             </div>
         </div>
     </div>
-    <div class="row py-3">
-        <div class="px-3">
-            <h5 class="category-item-title">Sản phẩm liên quan</h5>
-            <hr />
-        </div>
-        <div class="row product-carousel">
-            <button class="btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
-            <button class="btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
-            <div class="row product-carousel-list">
-                @foreach (var product in Model.Category.Products)
-                {
-                    <div class="product-item col-xl-3 col-md-4 col-6 px-3">
-                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card">
-                            <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)" />
-                            <div class="card-body">
-                                <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
-                                <span class="card-text"><span class="number-with-comma">@Html.DisplayFor(productItem => product.Price)</span> đ</span>
-                            </div>
-                        </a>
-                    </div>
-                }
+</div>
+
+<div class="modal fade" id="zoomProductImage" tabindex="-1" aria-labelledby="zoomProductImage" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body text-center w-100">
+                <img src="@Html.DisplayFor(image => Model.ImageLink)" class="img-fluid" id="zoomedImage">
             </div>
         </div>
     </div>
 </div>
-
+<div class="container py-3">
+    @if (Model.Category.Products.Count() != 0)
+    {
+        <div class="row">
+            <div class="px-3">
+                <h5 class="category-item-title">Sản phẩm liên quan</h5>
+                <hr />
+            </div>
+            <div class="row product-carousel">
+                <button class="btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                <button class="btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                <div class="row product-carousel-list">
+                    @foreach (var product in Model.Category.Products)
+                    {
+                        <div class="product-item col-xl-3 col-md-4 col-6 px-3">
+                            <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card">
+                                <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)" />
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
+                                    <span class="card-text"><span class="number-with-comma">@Html.DisplayFor(productItem => product.Price)</span> đ</span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <!-- Include multiple-select library -->
@@ -112,6 +131,7 @@
             $('.smallProductImage').click(function () {
                 var imageLink = $(this).attr("src");
                 $('#largeProductImage').attr("src", imageLink);
+                $('#zoomedImage').attr("src", imageLink);
             })
 
             // Change the quantity
@@ -128,6 +148,7 @@
                 if (selectedQuantity != 0) {
                     $('.product-quantity').html(selectedQuantity);
                     $('.input-quantity').attr('max', selectedQuantity);
+                    $('.input-quantity').val("1");
                     $('.buyProduct-btn').prop('disabled', false);
 
                 } 

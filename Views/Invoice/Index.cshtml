@@ -1,0 +1,73 @@
+﻿@model List<Invoice>
+@{
+    ViewData["Title"] = "Index";
+    var totalInvoices = Model.Count();
+}
+
+<div class="container container-wrapper p-4 rounded-1">
+    <h4>Đơn hàng của bạn</h4>
+    @if(Model == null)
+    {
+        <p>Bạn không có đơn hàng nào</p>
+    }
+    else
+    {
+        <div class="accordion" id="accordionInvoice">
+        @foreach (var item in Model)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#invoice-@Html.DisplayFor(accordionId => item.InvoiceCode)" aria-expanded="true" aria-controls="invoice-@Html.DisplayFor(accordionId => item.InvoiceCode)">
+                        <div class="w-100 d-flex justify-content-between pe-4">
+                            <p class="text-start mb-0">Đơn hàng đặt vào : @Html.DisplayFor(itemInfo => item.DateOrdered) | Tổng tiền : @Html.DisplayFor(itemInfo => item.TotalPrice)</p>
+                            <strong class="text-info">@Html.DisplayFor(itemInfo => item.Status.Status)</strong>
+                        </div>
+                    </button>
+                </h2>
+                <div id="invoice-@Html.DisplayFor(accordionId => item.InvoiceCode)" class="accordion-collapse collapse" data-bs-parent="#accordionInvoice">
+                    <div class="accordion-body">
+                        <h6>Thông tin giao hàng</h6>
+                            <div class="row mb-3">
+                                <label class="w-100">Mã đơn hàng : @Html.DisplayFor(accordionId => item.InvoiceCode)</label>
+                                <label class="w-100">Tên người nhận : @Html.DisplayFor(accordionId => item.CustomerName)</label>
+                                <label class="w-100">Số điện thoại liên hệ : @Html.DisplayFor(accordionId => item.Phone)</label>
+                                <label class="w-100">Địa chỉ giao hàng : @Html.DisplayFor(accordionId => item.Address)</label>
+                            </div>
+                        <h6>Chi tiết đơn hàng</h6>
+                        @foreach (var invoiceItem in item.InvoiceItems)
+                        {
+                            <div class="row m-0 mb-1 border  border-1 border-solid border-color-ccc rounded-1">
+                                <div class="col-2 col-md-2 col-lg-1 p-2">
+                                    <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.ImageLink)" alt="hinhsanpham" />
+                                </div>
+                                <div class="col-10 align-content-center">
+                                    <div class="row p-0">
+                                        <p class="fw-bold m-0 ps-3">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.Name)</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p><span class="number-with-comma">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.CurrentPrice)</span> đ</p>
+                                        </div>
+                                        <div class="col-2"><p class="">Size : @Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Size.Name)</p></div>
+                                        <div class="col-3">
+                                            <p>Số lượng : @Html.DisplayFor(itemInfo => invoiceItem.Quantity)</p>
+                                        </div>
+                                        <div class="col-4">
+                                            @{
+                                                var itemPrice = invoiceItem.ProductItem.Product.CurrentPrice * invoiceItem.Quantity;
+                                            }
+                                            <p>Tổng giá : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+         }
+         </div>
+    }
+</div>
+

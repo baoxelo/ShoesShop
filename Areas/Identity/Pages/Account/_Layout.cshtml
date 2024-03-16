@@ -7,15 +7,22 @@
     {
         Layout = "/Views/Shared/_Layout.cshtml";
     }
+
+    string slide = "https://firebasestorage.googleapis.com/v0/b/shoesshop-88775.appspot.com/o/images%2FGi%C3%A0y%20b%C3%B3ng%20r%E1%BB%95%20Jordan%20ch%C3%ADnh%20h%C3%A3ng%20%C4%91%C6%B0%E1%BB%A3c%20nhi%E1%BB%81u%20ng%C6%B0%E1%BB%9Di%20%C6%B0a%20chu%E1%BB%99ng?alt=media&token=ef3f5fcb-4d0b-4492-9ec2-c7e576f0ee7d";
 }
-<div class="container container-wrapper">
-    <div>
-        <div class="col-md-9">
-            @RenderBody()
+
+<div class="container container-wrapper rounded-3 overflow-hidden position-relative">
+    <div class="row">
+        <div class="col-md-4 p-5">
+            <section>
+                @RenderBody()
+            </section>
+        </div>
+        <div class="col-md-8 p-0">
+            <img class="h-100 w-100" style="filter: brightness(0.8)" src="@Html.DisplayFor(image => slide)" alt="slideimage" />
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

@@ -1,0 +1,69 @@
+﻿@model ShoesShop.Models.Invoice
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="admin-body-wrapper p-3">
+
+    <h4>Xác nhận đơn hàng</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label class="control-label">Mã đơn hàng : @Model.InvoiceCode</label>
+                <label class="control-label">Tên khách hàng : @Model.CustomerName</label>
+                <label class="control-label">Liên hệ : @Model.Phone</label>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <label class="control-label">Sản phẩm: </label>
+                @foreach (var invoiceItem in Model.InvoiceItems)
+                {
+                    <div class="row m-0 mb-1 border  border-1 border-solid border-color-ccc rounded-1">
+                        <div class="col-2 col-md-2 col-lg-1 p-2">
+                            <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.ImageLink)" alt="hinhsanpham" />
+                        </div>
+                        <div class="col-10 align-content-center">
+                            <div class="row p-0">
+                                <p class="fw-bold m-0 ps-3">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.Name)</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p><span class="number-with-comma">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.CurrentPrice)</span> đ</p>
+                                </div>
+                                <div class="col-2"><p class="">Size : @Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Size.Name)</p></div>
+                                <div class="col-3">
+                                    <p>Số lượng : @Html.DisplayFor(itemInfo => invoiceItem.Quantity)</p>
+                                </div>
+                                <div class="col-4">
+                                    @{
+                                        var itemPrice = invoiceItem.ProductItem.Product.CurrentPrice * invoiceItem.Quantity;
+                                    }
+                                    <p>Tổng giá : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="StatusId" class="control-label"></label>
+                    <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                    <span asp-validation-for="StatusId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+
+</div>

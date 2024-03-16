@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ShoesShop.Models
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="btn-sm-square bg-white dropdown">
+        <button title="Tài khoản" class="rounded-circle h-100 w-100 border-0 dropdown-toggle p-0 overflow-hidden" type="button" id="dropdownAvatar" data-bs-toggle="dropdown" aria-expanded="false">
+            @{
+                // Get ID and user
+                var userId = UserManager.GetUserId(User);
+                var user = await UserManager.FindByIdAsync(userId);
+
+                if (user != null && !string.IsNullOrEmpty(user.Avatar))
+                {
+                    <img class="h-100 w-100 object-fit-cover" src="@user.Avatar" alt="User Avatar" />
+                }
+                else
+                {
+                    <span class="fa fa-user text-body"></span>
+                }
+            }
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAvatar">
+            <li class="dropdown-item"><a asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
+            <li class="dropdown-item"><a asp-controller="Invoice" asp-action="Index">Đơn hàng của bạn</a></li>
+            <li class="dropdown-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <input id="logout" type="submit" class="text-danger border-0 w-100 bg-transparent text-start p-0" title="Đăng xuất" value="Đăng xuất"/>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+}
+else
+{
+    <a class="btn-sm-square bg-white rounded-circle ms-3" asp-area="Identity" asp-page="/Account/Login">
+        <span class="fa fa-user text-body"></span>
+    </a>
+}

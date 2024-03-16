@@ -23,7 +23,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -33,9 +33,15 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Display(Name = "Tên đầy đủ")]
+            public string FullName { get; set; }
+
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Địa chỉ")]
+            public string Address { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -43,11 +49,13 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
+            UserName = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                FullName = user.FullName,
+                PhoneNumber = phoneNumber,
+                Address = user.Address
             };
         }
 
@@ -87,9 +95,17 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            user.FullName = Input.FullName;
+            user.Address = Input.Address;
+            var result = await _userManager.UpdateAsync(user);
+            if(!result.Succeeded)
+            {
+                StatusMessage = "Tên đầy đủ và địa chỉ có lỗi";
+                return Page();
+            }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Thông tin cá nhân đã được cập nhật";
             return RedirectToPage();
         }
     }
