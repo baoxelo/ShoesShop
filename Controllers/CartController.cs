@@ -21,7 +21,6 @@ namespace ShoesShop.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            Cart? cart;
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -33,6 +32,7 @@ namespace ShoesShop.Controllers
                 return NotFound("Khong tim thay tai khoan");
             }
             // Get Cart
+            Cart? cart;
             cart = await _context.Carts.FirstOrDefaultAsync(q => q.AppUserId == userId);
             if (cart == null)
             {
@@ -140,6 +140,54 @@ namespace ShoesShop.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Invoice");
         }
+
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> RemoveItem(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            string userId = await _userManager.GetUserIdAsync(user);
+            if (userId == null)
+            {
+                return NotFound("Khong tim thay tai khoan");
+            }
+            // Get Cart
+            Cart? cart;
+            cart = await _context.Carts.FirstOrDefaultAsync(q => q.AppUserId == userId);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+
+            var cartItem = await _context.CartItems.FirstOrDefaultAsync(q => q.Id == id);
+            if (cart.Id != cartItem.CartId)
+            {
+                return NotFound("Không thể xóa hàng của người khác");
+            }
+            var productItem = await _context.ProductItems.FirstOrDefaultAsync(q => q.Id == cartItem.ProductItemId);
+            if(productItem == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                productItem.Quantity += cartItem.Quantity;
+                _context.Remove(cartItem);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                throw;
+            }
+            return RedirectToAction("Index");
+        }
+
         public async Task<string> GenerateOrderNumber()
         {
             // Length of the order number string

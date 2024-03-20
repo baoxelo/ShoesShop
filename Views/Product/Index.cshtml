@@ -5,22 +5,22 @@
     var listQuantity = Model.Items.Select(q => q.Quantity).ToList();
 }
 
-<div class="container container-wrapper" >
+<div class="container container-wrapper">
     <div class="row my-3" style=" aspect-ratio: 3; ">
-        <div class="col-6 p-4 h-100" >
-            <div class="row h-100">
-                <div class="col-4 h-100 product-list-images-wrapper" >
-                    <div class="row mb-1 justify-content-end pe-3">
-                       <div class="col-6 p-0">
+        <div class="col-sm-12 col-lg-6 p-4 ">
+            <div class="row " style="height: 400px;">
+                <div class="col-4 h-100 product-list-images-wrapper">
+                    <div class="row mb-1 justify-content-center ">
+                        <div class="col-10 p-0">
                             <img class="w-100 btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(image => Model.ImageLink)" alt="imageItem" />
-                       </div>
+                        </div>
                     </div>
-                    @if(Model.Images != null)
+                    @if (Model.Images != null)
                     {
                         @for (var i = 0; i < Model.Images.Count(); i++)
                         {
-                            <div class="row mb-1 justify-content-end pe-3">
-                                <div class="col-6 p-0">
+                            <div class="row mb-1 justify-content-center">
+                                <div class="col-10 p-0">
                                     <img class="w-100 btn-image image-wrapper smallProductImage" src="@Html.DisplayFor(imageItem => Model.Images[i].ImageLink)" alt="imageItem" />
 
                                 </div>
@@ -28,13 +28,13 @@
                         }
                     }
                 </div>
-                <div class="h-100 col-8 align-content-center ps-3">
-                    <img id="largeProductImage" class="h-100 w-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" type="button" data-bs-toggle="modal" data-bs-target="#zoomProductImage" />
+                <div class="h-100 col-8 ps-3">
+                    <img id="largeProductImage" class="h-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" type="button" data-bs-toggle="modal" data-bs-target="#zoomProductImage" />
                 </div>
-                
+
             </div>
         </div>
-        <div class="col-6 p-4">
+        <div class="col-sm-12 col-lg-6 p-4">
             <div class="row">
                 <div class="product-info-wrapper">
                     <h1 class="product-name p-0">@Html.DisplayFor(productInfo => Model.Name)</h1>
@@ -45,6 +45,7 @@
                     <div class="productItem-list">
                         <form asp-action="BuyProduct" method="post">
                             <div class="form-group w-100">
+                                <h3 class="product-description">Giới tính : @Html.DisplayFor(firstItem => Model.Gender.GenderType)</h3>
                                 <h3 class="product-description">Còn lại : <span class="product-quantity">@Html.DisplayFor(firstItem => Model.Items[0].Quantity)</span></h3>
                                 <h3 class="product-description">Kích thước </h3>
                                 <input name="slug" type="hidden" value="@Html.DisplayFor(productInfo => Model.Slug)" />
@@ -81,8 +82,8 @@
                 <hr />
             </div>
             <div class="row product-carousel">
-                <button class="btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
-                <button class="btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                <button class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                <button class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
                 <div class="row product-carousel-list">
                     @foreach (var product in Model.Category.Products)
                     {

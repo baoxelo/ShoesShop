@@ -33,6 +33,7 @@ namespace ShoesShop.Models
             builder.ApplyConfiguration(new DiscountConfiguration());
             builder.ApplyConfiguration(new GenderConfiguration());
             builder.ApplyConfiguration(new SizeConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new InvoiceStatusConfiguration());
 
         }

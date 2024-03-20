@@ -12,12 +12,17 @@
         show = (bool)TempData["ShowCart"];
     }
     double totalPrice = 0;
-    int totalCartItem = cart.CartItems.Count();
+    
 }
 
 
 <div class="btn-sm-square bg-white ms-3 dropdown">
     @{
+        int totalCartItem = 0;
+        if (cart != null && cart.CartItems != null)
+        {
+            totalCartItem = cart.CartItems.Count();
+        }
         // Get ID and user
         var userId = UserManager.GetUserId(User);
         var user = await UserManager.FindByIdAsync(userId);
@@ -30,7 +35,7 @@
                     @Html.DisplayFor(count => totalCartItem)
                 </div>
             </button>
-            <div class="dropdown-menu dropdown-menu-end cart-partial row @(show ? "show" : "")" aria-labelledby="dropdownCartToggle" data-bs-popper="none">
+            <div class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end cart-partial row @(show ? "show" : "")" aria-labelledby="dropdownCartToggle" data-bs-popper="none">
                 <h6 class="text-center cartPartial-heading">Giỏ hàng</h6>
                 @if (cart != null && cart.CartItems != null && cart.CartItems.Count() != 0)
                 {

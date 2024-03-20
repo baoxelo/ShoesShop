@@ -39,7 +39,7 @@ a {
 }
 
 .product-item {
-  aspect-ratio: 4/5;
+  position: relative;
 }
 .product-item .product-card {
   height: 100%;
@@ -49,6 +49,31 @@ a {
 }
 .product-item .product-card:hover .card-img-top {
   filter: brightness(0.8);
+}
+.product-item .product-item-saleIcon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1;
+  font-size: 4rem;
+  color: gold;
+}
+.product-item p.product-item-saleIcon {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  background-color: transparent;
+}
+
+.product-card-price {
+  font-size: 1.3rem;
 }
 
 .product-list-images-wrapper {
@@ -103,10 +128,20 @@ a {
   box-shadow: 1px 1px 1px #ccc;
   padding-bottom: 0;
 }
+@media (max-width: 768px) {
+  .cart-partial {
+    width: 300px !important;
+  }
+}
 .cart-partial .cartPartial-list {
   max-height: 420px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+@media (max-width: 1028px) {
+  .cart-partial .cartPartial-list {
+    max-height: 360px;
+  }
 }
 .cart-partial .cartPartial-list::-webkit-scrollbar {
   width: 5px; /* Điều này có thể thay đổi tùy thuộc vào yêu cầu của bạn */
@@ -167,5 +202,28 @@ a {
 }
 
 .cartPage-cartItem {
+  position: relative;
   border: 1px solid #ccc;
+}
+.cartPage-cartItem .cartPage-remove-item {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  text-align: end;
+}
+.cartPage-cartItem .cartPage-remove-item button {
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+.cartPage-cartItem .cartPage-remove-item button:hover {
+  color: #ff0000;
+}
+.cartPage-cartItem .cartPage-remove-item button:active {
+  border: none !important;
+}
+.cartPage-cartItem .cartPage-remove-item button:focus {
+  box-shadow: none;
 }

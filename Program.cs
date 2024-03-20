@@ -4,17 +4,28 @@ using ShoesShop.ExtensionServices;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ShoesShop.Services;
 using ShoesShop;
+using Microsoft.AspNetCore.Identity;
+using ShoesShop.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
+builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<FirebaseController>();
 builder.Services.AddTransient<ConvertSlug>();
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DatabaseContext>();
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureIdentity();
+builder.Services.AddAuthorization();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<IEmailSender, SendMailService>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
 builder.Services.AddAuthentication().AddGoogle(googleOptions => {
     // Đọc thông tin Authentication:Google từ appsettings.json
     IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
@@ -25,7 +36,12 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions => {
     // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
     googleOptions.CallbackPath = "/Login-Google";
 });
-builder.Services.ConfigureIdentity();
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    // Trên 30 giây truy cập lại sẽ nạp lại thông tin User (Role)
+    // SecurityStamp trong bảng User đổi -> nạp lại thông tinn Security
+    options.ValidationInterval = TimeSpan.FromSeconds(30);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,6 +66,7 @@ app.MapControllerRoute(
     pattern: "{area:exists}/{controller}/{action=Index}/{id?}"
     );
 
+
 app.MapControllerRoute(
     name: "home",
     pattern: "/trang-chu/{action}/{id?}",
@@ -57,13 +74,13 @@ app.MapControllerRoute(
     );
 
 app.MapControllerRoute(
-    name: "home",
+    name: "cart",
     pattern: "/gio-hang/{action}/{id?}",
     defaults: new { controller = "Cart", action = "Index" }
     );
 
 app.MapControllerRoute(
-    name: "home",
+    name: "invoice",
     pattern: "/don-hang/{action}/{id?}",
     defaults: new { controller = "Invoice", action = "Index" }
     );

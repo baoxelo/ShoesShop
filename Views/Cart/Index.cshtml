@@ -5,7 +5,7 @@
 
 <div class="cartPage-wrapper container">
     <div class="row ">
-        <div class="col-8">
+        <div class="col-12 col-lg-8">
             <div class="container-wrapper rounded px-4 py-3 cartPage-list ">
                 <h4>Giỏ hàng của bạn</h4>
                 <hr />
@@ -18,12 +18,15 @@
                     <p class="mb-3">Bạn đang có @Html.DisplayFor(quantity => Model.CartItems.Count) sản phẩm trong giỏ hàng</p>
                     @for (var i = 0; i < Model.CartItems.Count(); i++)
                     {
-                        <a asp-controller="Product" asp-action="Index" asp-route-slug="@Model.CartItems[i].ProductItem.Product.Slug" class="row cartPage-cartItem m-0 mb-3">
+                        <div class="row cartPage-cartItem m-0 mb-3">
+                            <form asp-action="RemoveItem" class="cartPage-remove-item">
+                                <input type="hidden" name="id" value="@Html.DisplayFor(itemInfo => Model.CartItems[i].Id)"/>
+                                <button title="Bỏ sản phẩm" type="submit"><i class="fa-solid fa-x"></i></button>
+                            </form>
                             <div class="col-2 p-3">
                                     <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.ImageLink)" alt="hinhsanpham" />
-                             
                             </div>
-                            <div class="col-10 align-content-center">
+                            <a asp-controller="Product" asp-action="Index" asp-route-slug="@Model.CartItems[i].ProductItem.Product.Slug" class="col-10 align-content-center">
                                 <div class="row p-2">
                                     <h5 class="m-0 p-0">@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Name)</h5>
                                 </div>
@@ -43,19 +46,19 @@
                                         @{
                                             var itemPrice = Model.CartItems[i].ProductItem.Product.CurrentPrice * Model.CartItems[i].Quantity;
                                         }
-                                        <p>Tổng giá : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
+                                        <p>Tổng : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
 
-                        </a>
+                        </div>
                     }
                 }
             </div>
             
         </div>
-        <div class="col-4">
-            <div class="container-wrapper rounded px-4 py-3">
+        <div class="col-12 col-lg-4">
+            <div id="cart-confirm" class="container-wrapper rounded px-4 py-3 ">
                 <h4>Thông tin đơn hàng</h4>
                 <hr />
                 <div class="row">
@@ -94,3 +97,13 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var windowWidth = $(this).width();
+            if (windowWidth < 1028) {
+                $('#cart-confirm').css("margin-top", "0px");
+            }
+        });
+    </script>
+}

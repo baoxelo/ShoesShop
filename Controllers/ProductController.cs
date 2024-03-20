@@ -49,7 +49,7 @@ namespace ShoesShop.Controllers
                     }
                 }
             }
-            var product = await _context.Products.Include(q => q.Category).FirstOrDefaultAsync(x => x.Slug == slug);
+            var product = await _context.Products.Include(q => q.Category).Include(q => q.Gender).FirstOrDefaultAsync(x => x.Slug == slug);
             if (product == null)
             {
                 return NotFound("Không tìm thấy sản phẩm");
@@ -111,7 +111,7 @@ namespace ShoesShop.Controllers
             }
             try
             {
-                var cartItem = await _context.CartItems.Where(q => q.ProductItemId == productItem.Id && q.CartId == cart.Id).FirstOrDefaultAsync();
+                var cartItem = await _context.CartItems.FirstOrDefaultAsync(q => q.ProductItemId == productItem.Id && q.CartId == cart.Id);
                 if(cartItem != null)
                 {
                     cartItem.Quantity += quantity;

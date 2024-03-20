@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -18,6 +19,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "administrator")]
     public class ProductsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -25,6 +27,7 @@ namespace ShoesShop.Areas.Admin.Controllers
         private readonly FirebaseController _firebaseController;
         private readonly ILogger<ProductsController> _logger;
         public override void OnActionExecuting(ActionExecutingContext context) => ViewData["MenuBar"] = "Products";
+
         public ProductsController(DatabaseContext context, FirebaseController firebaseController, ILogger<ProductsController> logger, ConvertSlug convertSlug)
         {
             _firebaseController = firebaseController;
@@ -128,7 +131,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                     };
                     _context.ProductItems.Add(productItem);
                 }
-                for(var i = 0; i < 5; i++)
+                for(var i = 0; i < 6; i++)
                 {
                     var productImage = new ProductImage()
                     {

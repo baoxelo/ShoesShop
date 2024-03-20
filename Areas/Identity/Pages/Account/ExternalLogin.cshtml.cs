@@ -160,9 +160,9 @@ namespace ShoesShop.Areas.Identity.Pages.Account
                     return Page();
                 }
 
+                
 
-
-                var user = new AppUser { FullName = info.Principal.Identity.Name, UserName = Input.PhoneNumber, Email = Input.Email };
+                var user = new AppUser { FullName = info.Principal.Identity.Name, UserName = Input.PhoneNumber, Email = Input.Email, Avatar = info.Principal.FindFirstValue("picture") ?? info.Principal.FindFirstValue("avatar")};
                 Console.WriteLine(user.FullName);
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

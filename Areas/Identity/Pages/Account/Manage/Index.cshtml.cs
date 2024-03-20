@@ -7,6 +7,7 @@ using ShoesShop.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
 
 namespace ShoesShop.Areas.Identity.Pages.Account.Manage
 {
@@ -22,7 +23,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+        public string Avatar { set; get; }
         public string UserName { get; set; }
 
         [TempData]
@@ -42,20 +43,22 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Địa chỉ")]
             public string Address { get; set; }
+
+            public FormFile? ImageFile { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
             UserName = userName;
+            Avatar = user.Avatar;
 
             Input = new InputModel
             {
                 FullName = user.FullName,
                 PhoneNumber = phoneNumber,
-                Address = user.Address
+                Address = user.Address,
             };
         }
 

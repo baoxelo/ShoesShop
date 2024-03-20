@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using ShoesShop.Models;
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "administrator")]
     public class InvoicesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -30,25 +32,6 @@ namespace ShoesShop.Areas.Admin.Controllers
             return View(await databaseContext.ToListAsync());
         }
 
-        // GET: Admin/Invoices/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var invoice = await _context.Invoices
-                .Include(i => i.AppUser)
-                .Include(i => i.Status)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (invoice == null)
-            {
-                return NotFound();
-            }
-
-            return View(invoice);
-        }
 
 
         

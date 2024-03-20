@@ -7,8 +7,8 @@
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
+    <form class="row" id="profile-form" method="post">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="UserName" class="form-control" placeholder="Vui lòng chọn tên người dùng của bạn." disabled />
@@ -30,8 +30,16 @@
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Lưu</button>
-        </form>
-    </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group ps-4 row align-content-center">
+                <label for="edit-avatar-@Html.DisplayFor(avatar => Model.UserName)" class="control-label btn w-100 p-0 btn-chang-image" style="aspect-ratio: 1; display: block;">
+                    <img class="w-100 image-wrapper" src="@Model.Avatar" alt="avatar" />
+                </label>
+                <input onchange="mainModule.setImageToInput(this)" id="edit-avatar-@Html.DisplayFor(avatar => Model.UserName)" type="file" asp-for="Input.ImageFile" class="form-control" style="display: none;" />
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

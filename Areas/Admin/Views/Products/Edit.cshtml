@@ -10,8 +10,8 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-4 align-content-center">
-                    <label for="edit-product-main-image-@Html.DisplayFor(productImageId => Model.Id)" class="control-label btn w-100" style="aspect-ratio: 1; display: block;">
-                        <img class="w-100" style="aspect-ratio: 1;" src="@Model.ImageLink" alt="@Model.Name" />
+                    <label for="edit-product-main-image-@Html.DisplayFor(productImageId => Model.Id)" class="control-label btn btn-chang-image w-100" >
+                        <img class="w-100 image-wrapper" src="@Model.ImageLink" alt="@Model.Name" />
                     </label>
                     <input onchange="mainModule.setImageToInput(this)" id="edit-product-main-image-@Html.DisplayFor(productImageId => Model.Id)" type="file" asp-for="@Model.ImageFile" class="form-control" style="display: none;" />
                 </div>
@@ -23,8 +23,8 @@
                                 @Html.HiddenFor(model => Model.Images[i].Id, Model.Images[i].Id)
                                 @Html.HiddenFor(model => Model.Images[i].ProductId, Model.Images[i].ProductId)
                                 @Html.HiddenFor(model => Model.Images[i].ImageLink, Model.Images[i].ImageLink)
-                                <label for="edit-product-image-@Html.DisplayFor(productImageId => Model.Images[i].Id)" asp-for="@Model.Images[i].ImageFile" class="control-label btn w-100" style="aspect-ratio: 1; display: block;">
-                                    <img class="w-100" style="aspect-ratio: 1;" src="@Model.Images[i].ImageLink" alt="@Model.Name" />
+                                <label for="edit-product-image-@Html.DisplayFor(productImageId => Model.Images[i].Id)" asp-for="@Model.Images[i].ImageFile" class="control-label btn btn-chang-image w-100" >
+                                    <img class="w-100 image-wrapper" src="@Model.Images[i].ImageLink" alt="@Model.Name" />
                                 </label>
                                 <input onchange="mainModule.setImageToInput(this)" id="edit-product-image-@Html.DisplayFor(productImageId => Model.Images[i].Id)" type="file" asp-for="@Model.Images[i].ImageFile" class="form-control" style="display: none;" />
                             </div>

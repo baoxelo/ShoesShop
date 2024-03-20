@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using ShoesShop.Models;
 
-namespace ShoesShop
+namespace ShoesShop.Configuration
 {
-    public static class ServiceExtension
+    public static class IdentityConfiguration
     {
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentityCore<AppUser>(options =>
+            var builder = services.Configure<IdentityOptions>(options =>
             {
                 // Thiết lập về Password
                 options.Password.RequireDigit = false; // Không bắt phải có số
@@ -32,10 +31,7 @@ namespace ShoesShop
                 options.SignIn.RequireConfirmedPhoneNumber = false;     // Xác thực số điện thoại
             });
 
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
-            builder.AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
 
         }
     }
-    
 }

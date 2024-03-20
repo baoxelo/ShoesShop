@@ -13,12 +13,12 @@
 
 <div class="container container-wrapper rounded-3 overflow-hidden position-relative">
     <div class="row">
-        <div class="col-md-4 p-5">
+        <div class="col-12 col-lg-4 p-5">
             <section>
                 @RenderBody()
             </section>
         </div>
-        <div class="col-md-8 p-0">
+        <div class="d-none d-lg-block col-8 p-0" style="height: 570px">
             <img class="h-100 w-100" style="filter: brightness(0.8)" src="@Html.DisplayFor(image => slide)" alt="slideimage" />
         </div>
     </div>
