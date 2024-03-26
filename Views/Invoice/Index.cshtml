@@ -37,26 +37,26 @@
                         @foreach (var invoiceItem in item.InvoiceItems)
                         {
                             <div class="row m-0 mb-1 border  border-1 border-solid border-color-ccc rounded-1">
-                                <div class="col-2 col-md-2 col-lg-1 p-2">
+                                <div class="col-6 col-md-2 col-md-2 col-lg-1 p-2">
                                     <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.ImageLink)" alt="hinhsanpham" />
                                 </div>
-                                <div class="col-10 align-content-center">
+                                <div class="col-6 col-md-10 align-content-center">
                                     <div class="row p-0">
                                         <p class="fw-bold m-0 ps-3">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.Name)</p>
                                     </div>
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-12 col-md-3">
                                             <p><span class="number-with-comma">@Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Product.CurrentPrice)</span> đ</p>
                                         </div>
-                                        <div class="col-2"><p class="">Size : @Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Size.Name)</p></div>
-                                        <div class="col-3">
+                                        <div class="col-12 col-md-2"><p class="">Size : @Html.DisplayFor(itemInfo => invoiceItem.ProductItem.Size.Name)</p></div>
+                                        <div class="col-12 col-md-3">
                                             <p>Số lượng : @Html.DisplayFor(itemInfo => invoiceItem.Quantity)</p>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-12 col-md-4">
                                             @{
                                                 var itemPrice = invoiceItem.ProductItem.Product.CurrentPrice * invoiceItem.Quantity;
                                             }
-                                            <p>Tổng giá : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
+                                            <p>Tổng : <spam class="number-with-comma">@Html.DisplayFor(itemInfo => itemPrice)</spam> đ</p>
                                         </div>
                                     </div>
                                 </div>

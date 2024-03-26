@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
+using ShoesShop.ExtensionServices;
 
 namespace ShoesShop.Areas.Identity.Pages.Account.Manage
 {
@@ -15,13 +16,16 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly FirebaseController _firebaseController;
 
         public IndexModel(
             UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager,
+            FirebaseController firebaseController)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _firebaseController = firebaseController;
         }
         public string Avatar { set; get; }
         public string UserName { get; set; }
@@ -44,7 +48,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Địa chỉ")]
             public string Address { get; set; }
 
-            public FormFile? ImageFile { get; set; }
+            public IFormFile? ImageFile { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -100,6 +104,12 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             }
             user.FullName = Input.FullName;
             user.Address = Input.Address;
+            if(Input.ImageFile != null) 
+            {
+                var fileName = user.Email;
+                var imageLink = await _firebaseController.UploadImagetoFirebase(Input.ImageFile, fileName);
+                user.Avatar = imageLink;
+            }
             var result = await _userManager.UpdateAsync(user);
             if(!result.Succeeded)
             {

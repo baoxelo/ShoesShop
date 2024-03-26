@@ -12,18 +12,12 @@ var mainModule = (function () {
             var files = inputElement.files;
 
             if (files.length > 0) {
-                var img = $('<img>').attr('src', URL.createObjectURL(files[0]));
+                var img = $('<img>').attr('src', URL.createObjectURL(files[0])).attr('alt', 'avatar').addClass('image-wrapper');
 
                 img.on('load', function () {
                     URL.revokeObjectURL(this.src);
                 });
 
-                // Thêm CSS trực tiếp vào thẻ img
-                img.css({
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                });
 
                 labelElement.append(img);
             }
