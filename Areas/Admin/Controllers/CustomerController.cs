@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using ShoesShop.Models;
 
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "Administrator")]
 
     public class CustomerController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        public override void OnActionExecuting(ActionExecutingContext context) => ViewData["MenuBar"] = "ManageUser";
         public CustomerController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;

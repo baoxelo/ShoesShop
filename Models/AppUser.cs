@@ -29,5 +29,8 @@ namespace ShoesShop.Models
         [NotMapped]
         public Cart? Cart { get; set; }
 
+        [NotMapped]
+        public string? RoleNames { get; set; }
+
     }
 }

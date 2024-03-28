@@ -10,7 +10,8 @@ using ShoesShop.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite("filename=Data/Database/database.db"));
+/*builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));*/
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<FirebaseController>();

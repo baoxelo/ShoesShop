@@ -7,8 +7,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="btn-sm-square bg-white dropdown">
-        <button title="Tài khoản" class="rounded-circle h-100 w-100 border-0 dropdown-toggle p-0 overflow-hidden" type="button" id="dropdownAvatar" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="w-100 btn-sm-square bg-white dropdown">
+        <button title="Tài khoản" class="rounded-circle h-100 w-100 p-0 border-0 dropdown-toggle overflow-hidden" type="button" id="dropdownAvatar" data-bs-toggle="dropdown" aria-expanded="false">
             @{
                 // Get ID and user
                 var userId = UserManager.GetUserId(User);
@@ -16,7 +16,7 @@
 
                 if (user != null && !string.IsNullOrEmpty(user.Avatar))
                 {
-                    <img class="h-100 w-100 object-fit-cover" src="@user.Avatar" alt="User Avatar" />
+                    <img class="w-100 image-wrapper object-fit-cover" src="@user.Avatar" alt="User Avatar" />
                 }
                 else
                 {

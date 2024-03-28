@@ -19,7 +19,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private readonly DatabaseContext _context;

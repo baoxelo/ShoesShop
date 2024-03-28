@@ -13,7 +13,7 @@ using ShoesShop.Models;
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ConvertSlug _convertSlug;

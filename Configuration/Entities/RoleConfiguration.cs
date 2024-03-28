@@ -11,12 +11,14 @@ namespace ShoesShop.Configuration.Entities
             builder.HasData(
                 new IdentityRole
                 {
-                    Name = "user",
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "User",
                     NormalizedName = "USER"
                 },
                 new IdentityRole
                 {
-                    Name = "administrator",
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Administrator",
                     NormalizedName = "ADMINISTRATOR"
                 }
                 );

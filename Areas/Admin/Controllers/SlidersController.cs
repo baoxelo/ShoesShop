@@ -12,7 +12,8 @@ using ShoesShop.Models;
 namespace ShoesShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "Administrator")]
+
     public class SlidersController : Controller
     {
         private readonly FirebaseController _firebaseController;

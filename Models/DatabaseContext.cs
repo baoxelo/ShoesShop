@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShoesShop.Configuration.Entities;
-using System.Configuration;
 
 namespace ShoesShop.Models
 {

@@ -121,7 +121,7 @@
                     </li>
 
                     <!-- Layouts -->
-                    <li class="menu-item">
+                    <li class="menu-item @((ViewData["MenuBar"] as string == "ManageUser") ? "active" : "")">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
                             <div data-i18n="Layouts">Quản lí thông tin</div>
@@ -134,7 +134,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
+                                <a asp-area="Admin" asp-controller="UserRole" asp-action="Index" class="menu-link">
                                     <div data-i18n="Navbar">Phân quyền</div>
                                 </a>
                             </li>

@@ -55,7 +55,17 @@
                     <p>
                         @foreach (var provider in Model.ExternalLogins!)
                         {
-                            <button type="submit" class="btn" name="provider" value="@provider.Name" title="Đăng nhập với @provider.DisplayName account"><i class="fa-brands fa-google me-1"></i> @provider.DisplayName</button>
+                            <button type="submit" class="btn" name="provider" value="@provider.Name" title="Đăng nhập với @provider.DisplayName account">
+                                <i class="fa-brands fa-google me-1"></i>
+                                <span style="white-space: nowrap; letter-spacing: -1.5px;">
+                                    <span style="color: dodgerblue">G</span>
+                                    <span style="color: red">o</span>
+                                    <span style="color: #FFD700">o</span>
+                                    <span style="color: dodgerblue">g</span>
+                                    <span style="color: green">l</span>
+                                    <span style="color: red">e</span>
+                                </span>
+                            </button>
                         }
                     </p>
                 </div>

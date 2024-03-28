@@ -39,7 +39,7 @@ namespace ShoesShop.Models
 
         [Column]
         [DisplayName("Ngày đặt hàng")]
-        public DateTime? DateOrdered { get; set; }
+        public DateTime DateOrdered { get; set; }
 
         [ForeignKey(nameof(InvoiceStatus))]
         public int StatusId { get; set; }

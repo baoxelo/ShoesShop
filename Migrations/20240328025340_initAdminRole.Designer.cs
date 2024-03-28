@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoesShop.Models;
@@ -12,63 +11,70 @@ using ShoesShop.Models;
 namespace ShoesShop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240314110703_updateInvoice1")]
-    partial class updateInvoice1
+    [Migration("20240328025340_initAdminRole")]
+    partial class initAdminRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dcf0c365-c4e3-48ff-8788-41ebf5f6177a",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "e0e07852-fb58-4ad3-99a1-1a1dfbb17db3",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -81,19 +87,17 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -105,19 +109,17 @@ namespace ShoesShop.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -129,33 +131,38 @@ namespace ShoesShop.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "73ff4cb6-4cf1-4f3d-a9d4-47a0b54d841c",
+                            RoleId = "e0e07852-fb58-4ad3-99a1-1a1dfbb17db3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -165,10 +172,10 @@ namespace ShoesShop.Migrations
             modelBuilder.Entity("ShoesShop.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .HasMaxLength(500)
@@ -182,14 +189,14 @@ namespace ShoesShop.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -197,37 +204,37 @@ namespace ShoesShop.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -236,25 +243,41 @@ namespace ShoesShop.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "73ff4cb6-4cf1-4f3d-a9d4-47a0b54d841c",
+                            AccessFailedCount = 0,
+                            Avatar = "https://firebasestorage.googleapis.com/v0/b/shoesshop-88775.appspot.com/o/images%2Fuseravatar.jpg?alt=media&token=dd433b00-2f14-41d5-a239-ff2421b0ede6",
+                            ConcurrencyStamp = "962e3cd8-7dde-42a2-aba6-6fd93539fc68",
+                            Email = "vuqcbao@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Vũ Quốc Bảo",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAECOBsOHr3V+vGaxtZChsMLwPfb0KFBsAlo7Ag3y3BJgl1jOIyb7P0FsW5+BB3ISlHQ==",
+                            PhoneNumber = "0798991358",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "97af2f28-8c34-487b-a33e-1de16d3e219c",
+                            TwoFactorEnabled = false,
+                            UserName = "vuqcbao@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("ShoesShop.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -267,15 +290,13 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CartId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ProductItemId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -293,12 +314,10 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -308,7 +327,7 @@ namespace ShoesShop.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -331,9 +350,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(938),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8315),
                             Description = "Giày Boot da chất lượng cao sản xuất tại Việt Nam",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(950),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8330),
                             Name = "Giày Boot",
                             Slug = "giay-boot",
                             Status = "Hoạt động"
@@ -341,9 +360,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(952),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8333),
                             Description = "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(953),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8333),
                             Name = "Giày thể thao",
                             Slug = "giay-the-thao",
                             Status = "Hoạt động"
@@ -354,19 +373,17 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -388,9 +405,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1135),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8589),
                             Description = "Không giảm",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1136),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8590),
                             Name = "00%",
                             Percent = 0,
                             Status = "Hoạt động"
@@ -398,9 +415,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1137),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8593),
                             Description = "Giảm 20%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1139),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8593),
                             Name = "20%",
                             Percent = 20,
                             Status = "Hoạt động"
@@ -408,9 +425,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1140),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8595),
                             Description = "Giảm 30%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1141),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8595),
                             Name = "30%",
                             Percent = 30,
                             Status = "Hoạt động"
@@ -418,9 +435,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1142),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8597),
                             Description = "Giảm 40%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1142),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8598),
                             Name = "40%",
                             Percent = 40,
                             Status = "Hoạt động"
@@ -428,9 +445,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1144),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8601),
                             Description = "Giảm 50%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1144),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8602),
                             Name = "50%",
                             Percent = 50,
                             Status = "Hoạt động"
@@ -438,9 +455,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1145),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8603),
                             Description = "Giảm 60%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1146),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8604),
                             Name = "60%",
                             Percent = 60,
                             Status = "Hoạt động"
@@ -448,9 +465,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1147),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8605),
                             Description = "Giảm 70%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1148),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8605),
                             Name = "70%",
                             Percent = 70,
                             Status = "Hoạt động"
@@ -458,9 +475,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1149),
+                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8607),
                             Description = "Giảm 80%",
-                            ModifyDate = new DateTime(2024, 3, 14, 18, 7, 2, 418, DateTimeKind.Local).AddTicks(1149),
+                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8607),
                             Name = "80%",
                             Percent = 80,
                             Status = "Hoạt động"
@@ -471,9 +488,7 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("GenderType")
                         .IsRequired()
@@ -510,32 +525,33 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CustomerName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("DateOrdered")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("DateOrdered")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("InvoiceCode")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int>("StatusId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<double?>("TotalPrice")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -550,15 +566,13 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("InvoiceId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ProductItemId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -576,9 +590,7 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(50)");
@@ -621,34 +633,32 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<double?>("CurrentPrice")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("DiscountId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("GenderId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -656,7 +666,7 @@ namespace ShoesShop.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<double?>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Slug")
                         .HasMaxLength(255)
@@ -684,15 +694,13 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -705,18 +713,16 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("SizeId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -731,9 +737,7 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .HasMaxLength(150)
@@ -815,12 +819,10 @@ namespace ShoesShop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -830,7 +832,7 @@ namespace ShoesShop.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
