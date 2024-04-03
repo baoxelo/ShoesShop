@@ -1,10 +1,10 @@
 ﻿
 'use strict'
 // MAIN MODULE JAVASCRIPTS
-var mainModule = (function () {
+var mainModule =  {
 
-    // SET IMAGE TO INPUT COMPONENTS    
-    function setImageToInput(inputElement) {
+    // SET IMAGE TO INPUT COMPONENTS
+    setImageToInput : function (inputElement) {
         var labelElement = $(inputElement).prev();
         if (inputElement && labelElement.length > 0) {
             labelElement.empty();
@@ -23,9 +23,4 @@ var mainModule = (function () {
             }
         }
     }
-    return {
-        setImageToInput: setImageToInput
-    }
-})();
-
-mainModule();
+};

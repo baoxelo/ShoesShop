@@ -197,6 +197,10 @@ a {
   font-size: 0.75rem;
 }
 
+.search-product-input {
+  outline: none;
+}
+
 .cartPage-wrapper {
   background-color: #f5f5f5;
 }

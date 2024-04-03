@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol;
 using ShoesShop.ExtensionServices;
 using ShoesShop.Models;
 using System.Security.Claims;
@@ -22,6 +24,7 @@ namespace ShoesShop.Controllers
             _logger = logger;
             _userManager = userManager;
         }
+
         public async Task<IActionResult> Index( string slug)
         {
             // Load card 
@@ -139,6 +142,20 @@ namespace ShoesShop.Controllers
 
                 return NotFound("Có lỗi xảy ra");
             }
+        }
+        // GET: Product/SearchProduct
+        public ActionResult SearchProduct(string searchText)
+        {
+            var products = _context.Products.Where(q => q.Name.ToLower().Contains(searchText)).Include(q => q.Category).Include(q => q.Gender).ToList();
+            var results = products.Select(p => new {
+                Url = $"/san-pham/{p.Slug}",
+                ImageUrl = p.ImageLink, // Product image URL
+                Name = p.Name, // Product name
+                Category = p.Category.Name,
+                Gender = p.Gender.GenderType,
+                Price = p.CurrentPrice,
+            });
+            return Json(results);
         }
     }
 }

@@ -11,6 +11,12 @@
     margin-bottom: 40px;
   }
 }
+@media (max-width: 768px) {
+  .container-wrapper {
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+}
 
 .back-to-top {
   position: fixed;
@@ -38,6 +44,15 @@
 p {
   font-family: "Times New Roman, Georgia, Cambria";
   margin: 0;
+}
+
+.hover-darkness:hover {
+  filter: brightness(0.8);
+  background-color: #eee;
+}
+
+input:focus {
+  outline: none !important;
 }
 
 .validation-summary-errors ul {
