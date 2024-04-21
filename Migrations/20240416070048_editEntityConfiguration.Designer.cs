@@ -11,14 +11,14 @@ using ShoesShop.Models;
 namespace ShoesShop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240328015736_init")]
-    partial class init
+    [Migration("20240416070048_editEntityConfiguration")]
+    partial class editEntityConfiguration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -48,13 +48,13 @@ namespace ShoesShop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "af7aa298-3dcf-44b9-8335-d3dcb2152554",
+                            Id = "39f6c631-fb13-499c-9079-7cef9f9dcc4b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f38afb95-c923-48fe-a01f-036d58a02c2c",
+                            Id = "262234fe-63dd-4f6b-9f2b-12ef2b120717",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -324,9 +324,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4939),
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1442),
                             Description = "Giày Boot da chất lượng cao sản xuất tại Việt Nam",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4952),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1467),
                             Name = "Giày Boot",
                             Slug = "giay-boot",
                             Status = "Hoạt động"
@@ -334,9 +334,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4954),
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1475),
                             Description = "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4955),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1476),
                             Name = "Giày thể thao",
                             Slug = "giay-the-thao",
                             Status = "Hoạt động"
@@ -379,9 +379,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5169),
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1967),
                             Description = "Không giảm",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5170),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1972),
                             Name = "00%",
                             Percent = 0,
                             Status = "Hoạt động"
@@ -389,69 +389,79 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5173),
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1977),
+                            Description = "Không giảm",
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1978),
+                            Name = "10%",
+                            Percent = 10,
+                            Status = "Hoạt động"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1981),
                             Description = "Giảm 20%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5173),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1982),
                             Name = "20%",
                             Percent = 20,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 3,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5175),
+                            Id = 4,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1987),
                             Description = "Giảm 30%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5175),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1988),
                             Name = "30%",
                             Percent = 30,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 4,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5176),
+                            Id = 5,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1990),
                             Description = "Giảm 40%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5177),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1991),
                             Name = "40%",
                             Percent = 40,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 5,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5178),
+                            Id = 6,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1993),
                             Description = "Giảm 50%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5179),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1994),
                             Name = "50%",
                             Percent = 50,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 6,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5180),
+                            Id = 7,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1996),
                             Description = "Giảm 60%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5180),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(1997),
                             Name = "60%",
                             Percent = 60,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 7,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5182),
+                            Id = 8,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(2000),
                             Description = "Giảm 70%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5182),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(2001),
                             Name = "70%",
                             Percent = 70,
                             Status = "Hoạt động"
                         },
                         new
                         {
-                            Id = 8,
-                            CreateDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5183),
+                            Id = 9,
+                            CreateDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(2003),
                             Description = "Giảm 80%",
-                            ModifyDate = new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5184),
+                            ModifyDate = new DateTime(2024, 4, 16, 14, 0, 44, 964, DateTimeKind.Local).AddTicks(2004),
                             Name = "80%",
                             Percent = 80,
                             Status = "Hoạt động"

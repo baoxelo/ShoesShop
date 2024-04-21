@@ -51,8 +51,9 @@ p {
 }
 .hover-darkness {
     &:hover {
-        filter: brightness(0.8);
-        background-color: #eee;
+        filter: brightness(0.95);
+        background-color: #fff;
+        cursor: pointer;
     }
 }
 input:focus {
@@ -223,10 +224,12 @@ input:focus {
         padding: 0;
         flex-wrap: nowrap;
         overflow: scroll;
+        overflow-y: hidden;
         /* Thanh cuộn */
         &::-webkit-scrollbar {
             display: none;
         }
+        
     }
 }
 /*** Size listbox ***/

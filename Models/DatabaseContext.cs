@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Firebase.Auth;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using ShoesShop.Configuration.Entities;
+using System.Reflection.Emit;
 
 namespace ShoesShop.Models
 {
     public class DatabaseContext : IdentityDbContext<AppUser> 
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             base.ConfigureConventions(configurationBuilder);
@@ -13,7 +17,9 @@ namespace ShoesShop.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+
+            string dbPath = Path.Combine(_webHostEnvironment.ContentRootPath, "Data/Database/database.db");
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,10 +40,10 @@ namespace ShoesShop.Models
             builder.ApplyConfiguration(new SizeConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new InvoiceStatusConfiguration());
-
         }
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) 
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IWebHostEnvironment webHostEnvironment) : base(options) 
         {
+            _webHostEnvironment = webHostEnvironment;
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

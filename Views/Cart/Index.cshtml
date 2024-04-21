@@ -26,7 +26,7 @@
                             <div class="col-2 p-3">
                                     <img class="w-100 image-wrapper" src="@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.ImageLink)" alt="hinhsanpham" />
                             </div>
-                            <a asp-controller="Product" asp-action="Index" asp-route-slug="@Model.CartItems[i].ProductItem.Product.Slug" class="col-10 align-content-center">
+                            <a asp-controller="Product" asp-action="Index" asp-route-slug="@Model.CartItems[i].ProductItem.Product.Slug" class="col-10 align-content-center d-flex flex-column justify-content-center text-dark">
                                 <div class="row p-2">
                                     <h5 class="m-0 p-0">@Html.DisplayFor(itemInfo => Model.CartItems[i].ProductItem.Product.Name)</h5>
                                 </div>

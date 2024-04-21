@@ -11,8 +11,8 @@ using ShoesShop.Models;
 namespace ShoesShop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240328025340_initAdminRole")]
-    partial class initAdminRole
+    [Migration("20240409085028_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,13 +48,13 @@ namespace ShoesShop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dcf0c365-c4e3-48ff-8788-41ebf5f6177a",
+                            Id = "34dc5329-a70a-463e-a239-a3aceddd6314",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "e0e07852-fb58-4ad3-99a1-1a1dfbb17db3",
+                            Id = "207d53fc-fff4-4469-8cd2-f514167e7d79",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -141,13 +141,6 @@ namespace ShoesShop.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "73ff4cb6-4cf1-4f3d-a9d4-47a0b54d841c",
-                            RoleId = "e0e07852-fb58-4ad3-99a1-1a1dfbb17db3"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -246,25 +239,6 @@ namespace ShoesShop.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("Users", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "73ff4cb6-4cf1-4f3d-a9d4-47a0b54d841c",
-                            AccessFailedCount = 0,
-                            Avatar = "https://firebasestorage.googleapis.com/v0/b/shoesshop-88775.appspot.com/o/images%2Fuseravatar.jpg?alt=media&token=dd433b00-2f14-41d5-a239-ff2421b0ede6",
-                            ConcurrencyStamp = "962e3cd8-7dde-42a2-aba6-6fd93539fc68",
-                            Email = "vuqcbao@gmail.com",
-                            EmailConfirmed = true,
-                            FullName = "Vũ Quốc Bảo",
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAECOBsOHr3V+vGaxtZChsMLwPfb0KFBsAlo7Ag3y3BJgl1jOIyb7P0FsW5+BB3ISlHQ==",
-                            PhoneNumber = "0798991358",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "97af2f28-8c34-487b-a33e-1de16d3e219c",
-                            TwoFactorEnabled = false,
-                            UserName = "vuqcbao@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("ShoesShop.Models.Cart", b =>
@@ -350,9 +324,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8315),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8606),
                             Description = "Giày Boot da chất lượng cao sản xuất tại Việt Nam",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8330),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8621),
                             Name = "Giày Boot",
                             Slug = "giay-boot",
                             Status = "Hoạt động"
@@ -360,9 +334,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8333),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8623),
                             Description = "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8333),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8623),
                             Name = "Giày thể thao",
                             Slug = "giay-the-thao",
                             Status = "Hoạt động"
@@ -405,9 +379,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8589),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8799),
                             Description = "Không giảm",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8590),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8800),
                             Name = "00%",
                             Percent = 0,
                             Status = "Hoạt động"
@@ -415,9 +389,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8593),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8801),
                             Description = "Giảm 20%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8593),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8802),
                             Name = "20%",
                             Percent = 20,
                             Status = "Hoạt động"
@@ -425,9 +399,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8595),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8803),
                             Description = "Giảm 30%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8595),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8804),
                             Name = "30%",
                             Percent = 30,
                             Status = "Hoạt động"
@@ -435,9 +409,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8597),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8805),
                             Description = "Giảm 40%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8598),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8805),
                             Name = "40%",
                             Percent = 40,
                             Status = "Hoạt động"
@@ -445,9 +419,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8601),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8806),
                             Description = "Giảm 50%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8602),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8807),
                             Name = "50%",
                             Percent = 50,
                             Status = "Hoạt động"
@@ -455,9 +429,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8603),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8808),
                             Description = "Giảm 60%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8604),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8809),
                             Name = "60%",
                             Percent = 60,
                             Status = "Hoạt động"
@@ -465,9 +439,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8605),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8810),
                             Description = "Giảm 70%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8605),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8810),
                             Name = "70%",
                             Percent = 70,
                             Status = "Hoạt động"
@@ -475,9 +449,9 @@ namespace ShoesShop.Migrations
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8607),
+                            CreateDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8812),
                             Description = "Giảm 80%",
-                            ModifyDate = new DateTime(2024, 3, 28, 9, 53, 39, 569, DateTimeKind.Local).AddTicks(8607),
+                            ModifyDate = new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8812),
                             Name = "80%",
                             Percent = 80,
                             Status = "Hoạt động"

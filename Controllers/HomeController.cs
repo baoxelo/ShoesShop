@@ -26,6 +26,9 @@ namespace ShoesShop.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+            string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "database.db");
+            _logger.LogInformation(dbPath);
             // Load card 
             if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
             {

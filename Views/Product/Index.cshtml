@@ -8,12 +8,12 @@
 <div class="container container-wrapper">
     <div class="row my-3" style=" aspect-ratio: 3; ">
         <div class="col-sm-12 col-lg-6 p-4 ">
-            <div class="row " style="height: 400px;">
-                <div class="col-4 h-100 product-list-images-wrapper">
+            <div class="row product-image-wrapper">
+                <div class="col-3 product-list-images-wrapper">
                     
                 </div>
-                <div class="h-100 col-8 ps-3">
-                    <img id="largeProductImage" class="h-100 image-wrapper" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" type="button" data-bs-toggle="modal" data-bs-target="#zoomProductImage" />
+                <div class="col-9 ps-3">
+                    <img id="largeProductImage" class=" image-wrapper hover-darkness" src="@Html.DisplayFor(image => Model.ImageLink)" alt="product-image" type="button" data-bs-toggle="modal" data-bs-target="#zoomProductImage" />
                 </div>
 
             </div>
@@ -23,9 +23,17 @@
                 <div class="product-info-wrapper">
                     <h1 class="product-name p-0">@Html.DisplayFor(productInfo => Model.Name)</h1>
                     <h3 class="product-description">Mô tả : @Html.DisplayFor(productInfo => Model.Description)</h3>
-                    <span class="product-price">
-                        <span class="number-with-comma">@Html.DisplayFor(productInfo => Model.Price)</span> đ
-                    </span>
+                    <div class="product-price-wrapper">
+                        @if (Model.Discount.Percent != 0)
+                        {
+                            <span class="text-dark product-price">
+                                <span class="number-with-comma text-decoration-line-through">@Html.DisplayFor(productInfo => Model.Price)</span> đ
+                            </span>
+                        }
+                        <span class="product-discount-price">
+                            <span class="number-with-comma">@Html.DisplayFor(productInfo => Model.CurrentPrice)</span> đ
+                        </span>
+                    </div>
                     <div class="productItem-list">
                         <form asp-action="BuyProduct" method="post">
                             <div class="form-group w-100">
@@ -72,11 +80,29 @@
                     @foreach (var product in Model.Category.Products)
                     {
                         <div class="product-item col-xl-3 col-md-4 col-6 px-3">
+                            @if (product.Discount.Percent != 0)
+                            {
+                                <i class="fa-solid fa-certificate product-item-saleIcon"></i>
+                                <p class="product-item-saleIcon">@Html.DisplayFor(productItem => product.Discount.Percent)%</p>
+                            }
                             <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card">
                                 <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)" />
                                 <div class="card-body">
                                     <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
-                                    <span class="card-text"><span class="number-with-comma">@Html.DisplayFor(productItem => product.Price)</span> đ</span>
+                                    @if (product.Discount.Percent != 0)
+                                    {
+                                        <div class="d-lg-flex d-md-block justify-content-between">
+                                            <p class="product-card-price card-text text-danger fw-bold d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => product.CurrentPrice)</span> đ</p>
+                                            <p class="product-card-price card-text text-decoration-line-through d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => product.Price)</span> đ</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-lg-flex d-md-block justify-content-between">
+                                            <p class="product-card-price card-text text-danger fw-bold d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => product.CurrentPrice)</span> đ</p>
+                                            <p> </p>
+                                        </div>
+                                    }
                                 </div>
                             </a>
                         </div>
@@ -124,9 +150,9 @@
             }
             imageLink.forEach((image) => {
                     $('.product-list-images-wrapper').append(`
-                        <div class="flex-md-row d-md-flex mb-1 justify-content-center">
+                        <div class="flex-md-row d-flex mb-1 justify-content-center">
                             <div class="col-10 p-0">
-                                <img class="w-100 btn-image image-wrapper smallProductImage" src="${image}" alt="imageItem" />
+                                <img class="w-100 btn-image image-wrapper smallProductImage hover-darkness" src="${image}" alt="imageItem" />
                             </div>
                         </div>
             `       )

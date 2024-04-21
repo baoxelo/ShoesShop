@@ -456,8 +456,8 @@ namespace ShoesShop.Migrations
                 columns: new[] { "Id", "CreateDate", "Description", "ImageLink", "ModifyDate", "Name", "Slug", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4939), "Giày Boot da chất lượng cao sản xuất tại Việt Nam", null, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4952), "Giày Boot", "giay-boot", "Hoạt động" },
-                    { 2, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4954), "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)", null, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(4955), "Giày thể thao", "giay-the-thao", "Hoạt động" }
+                    { 1, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8606), "Giày Boot da chất lượng cao sản xuất tại Việt Nam", null, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8621), "Giày Boot", "giay-boot", "Hoạt động" },
+                    { 2, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8623), "Giày thể thao phù hợp với mọi hoạt động vui chơi (Nike, Adidas, Jordan, v.v)", null, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8623), "Giày thể thao", "giay-the-thao", "Hoạt động" }
                 });
 
             migrationBuilder.InsertData(
@@ -465,14 +465,14 @@ namespace ShoesShop.Migrations
                 columns: new[] { "Id", "CreateDate", "Description", "ModifyDate", "Name", "Percent", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5169), "Không giảm", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5170), "00%", 0, "Hoạt động" },
-                    { 2, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5173), "Giảm 20%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5173), "20%", 20, "Hoạt động" },
-                    { 3, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5175), "Giảm 30%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5175), "30%", 30, "Hoạt động" },
-                    { 4, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5176), "Giảm 40%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5177), "40%", 40, "Hoạt động" },
-                    { 5, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5178), "Giảm 50%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5179), "50%", 50, "Hoạt động" },
-                    { 6, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5180), "Giảm 60%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5180), "60%", 60, "Hoạt động" },
-                    { 7, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5182), "Giảm 70%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5182), "70%", 70, "Hoạt động" },
-                    { 8, new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5183), "Giảm 80%", new DateTime(2024, 3, 28, 8, 57, 35, 420, DateTimeKind.Local).AddTicks(5184), "80%", 80, "Hoạt động" }
+                    { 1, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8799), "Không giảm", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8800), "00%", 0, "Hoạt động" },
+                    { 2, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8801), "Giảm 20%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8802), "20%", 20, "Hoạt động" },
+                    { 3, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8803), "Giảm 30%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8804), "30%", 30, "Hoạt động" },
+                    { 4, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8805), "Giảm 40%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8805), "40%", 40, "Hoạt động" },
+                    { 5, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8806), "Giảm 50%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8807), "50%", 50, "Hoạt động" },
+                    { 6, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8808), "Giảm 60%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8809), "60%", 60, "Hoạt động" },
+                    { 7, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8810), "Giảm 70%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8810), "70%", 70, "Hoạt động" },
+                    { 8, new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8812), "Giảm 80%", new DateTime(2024, 4, 9, 15, 50, 26, 916, DateTimeKind.Local).AddTicks(8812), "80%", 80, "Hoạt động" }
                 });
 
             migrationBuilder.InsertData(
@@ -502,8 +502,8 @@ namespace ShoesShop.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "af7aa298-3dcf-44b9-8335-d3dcb2152554", null, "User", "USER" },
-                    { "f38afb95-c923-48fe-a01f-036d58a02c2c", null, "Administrator", "ADMINISTRATOR" }
+                    { "207d53fc-fff4-4469-8cd2-f514167e7d79", null, "Administrator", "ADMINISTRATOR" },
+                    { "34dc5329-a70a-463e-a239-a3aceddd6314", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

@@ -126,6 +126,12 @@ namespace ShoesShop.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var registedPhoneNumber = await _userManager.FindByNameAsync(Input.PhoneNumber);
+                if(registedPhoneNumber != null)
+                {
+                    ErrorMessage = "Số điện thoại này đã được đăng kí vui lòng sử dụng số khác";
+                    return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                }
                 var registedUser = await _userManager.FindByEmailAsync(Input.Email);
                 string externalEmail = null;
                 AppUser externalEmailUser = null;
@@ -160,9 +166,12 @@ namespace ShoesShop.Areas.Identity.Pages.Account
                     return Page();
                 }
 
+
                 
 
-                var user = new AppUser { FullName = info.Principal.Identity.Name, UserName = Input.PhoneNumber, Email = Input.Email, Avatar = info.Principal.FindFirstValue("picture") ?? info.Principal.FindFirstValue("avatar")};
+                var user = new AppUser { FullName = info.Principal.Identity.Name, UserName = Input.PhoneNumber, Email = Input.Email, Avatar = info.Principal.FindFirstValue("image"), EmailConfirmed = true};
+                var newpassword = Input.PhoneNumber;
+                user.PasswordHash = new PasswordHasher<AppUser>().HashPassword(user, newpassword);
                 Console.WriteLine(user.FullName);
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -171,25 +180,8 @@ namespace ShoesShop.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-
-                        var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                        var callbackUrl = Url.Page(
-                            "/Account/ConfirmEmail",
-                            pageHandler: null,
-                            values: new { area = "Identity", userId = userId, code = code },
-                            protocol: Request.Scheme);
-
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                        // If account confirmation is required, we need to show the link if we don't have a real email sender
-                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                        {
-                            return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
-                        }
-
+                        await _userManager.ConfirmEmailAsync(user, code);
                         await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
 
                         return LocalRedirect(returnUrl);
@@ -204,6 +196,14 @@ namespace ShoesShop.Areas.Identity.Pages.Account
             ProviderDisplayName = info.ProviderDisplayName;
             ReturnUrl = returnUrl;
             return Page();
+        }
+        private string GenerateRandomPassword()
+        {
+            // Đây là một cách đơn giản, bạn có thể thay đổi phương thức tạo mật khẩu tùy thuộc vào nhu cầu của bạn
+            var options = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var password = new string(Enumerable.Repeat(options, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+            return password;
         }
     }
 }

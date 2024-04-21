@@ -52,14 +52,18 @@ namespace ShoesShop.Controllers
                     }
                 }
             }
-            var product = await _context.Products.Include(q => q.Category).Include(q => q.Gender).FirstOrDefaultAsync(x => x.Slug == slug);
+            var product = await _context.Products
+                                        .Include(q => q.Category)
+                                        .Include(q => q.Gender)
+                                        .Include(q => q.Discount)
+                                        .FirstOrDefaultAsync(x => x.Slug == slug);
             if (product == null)
             {
                 return NotFound("Không tìm thấy sản phẩm");
             }
             if(product.Category != null)
             {
-                product.Category.Products = await _context.Products.Where(q => q.CategoryId == product.CategoryId && q.Id != product.Id).ToListAsync();
+                product.Category.Products = await _context.Products.Where(q => q.CategoryId == product.CategoryId && q.Id != product.Id).Include(q => q.Discount).ToListAsync();
             }
             product.Images = await _context.ProductImages.Where(q => q.ProductId == product.Id).ToListAsync();
             product.Items = await _context.ProductItems.Include(q => q.Size).Where(q => q.ProductId == product.Id).ToListAsync();

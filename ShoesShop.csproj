@@ -7,6 +7,8 @@
     <UserSecretsId>69bc43d8-3b40-4b46-9290-606124b9a647</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+    <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,29 +19,29 @@
   <ItemGroup>
     <PackageReference Include="Firebase.Auth" Version="1.0.0" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-    <PackageReference Include="MailKit" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="8.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+    <PackageReference Include="MailKit" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="8.0.2" />
-    <PackageReference Include="MimeKit" Version="4.4.0" />
+    <PackageReference Include="MimeKit" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -47,7 +49,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Identity\Pages\Account\Manage\Shared\" />
     <Folder Include="Data\Database\" />
-    <Folder Include="Data\Images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -89,6 +90,12 @@
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
     <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
+      <Value>8081</Value>
+    </ContainerEnvironmentVariable>
   </ItemGroup>
 
 </Project>

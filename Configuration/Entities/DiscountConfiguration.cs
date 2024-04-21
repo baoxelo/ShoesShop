@@ -24,6 +24,17 @@ namespace ShoesShop.Configuration.Entities
                 new Discount
                 {
                     Id = 2,
+                    Name = "10%",
+                    Description = "Không giảm",
+                    Percent = 10,
+                    CreateDate = DateTime.Now,
+                    ModifyDate = DateTime.Now,
+                    Status = "Hoạt động"
+
+                },
+                new Discount
+                {
+                    Id = 3,
                     Name = "20%",
                     Description = "Giảm 20%",
                     Percent = 20,
@@ -33,7 +44,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 3,
+                    Id = 4,
                     Name = "30%",
                     Description = "Giảm 30%",
                     Percent = 30,
@@ -43,7 +54,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 4,
+                    Id = 5,
                     Name = "40%",
                     Description = "Giảm 40%",
                     Percent = 40,
@@ -53,7 +64,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 5,
+                    Id = 6,
                     Name = "50%",
                     Description = "Giảm 50%",
                     Percent = 50,
@@ -63,7 +74,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 6,
+                    Id = 7,
                     Name = "60%",
                     Description = "Giảm 60%",
                     Percent = 60,
@@ -73,7 +84,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 7,
+                    Id = 8,
                     Name = "70%",
                     Description = "Giảm 70%",
                     Percent = 70,
@@ -83,7 +94,7 @@ namespace ShoesShop.Configuration.Entities
                 },
                 new Discount
                 {
-                    Id = 8,
+                    Id = 9,
                     Name = "80%",
                     Description = "Giảm 80%",
                     Percent = 80,

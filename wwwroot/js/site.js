@@ -98,7 +98,7 @@ $(document).ready(function () {
                 })
                 response.forEach( (product) => {
                     const resultHtml = `<div class="w-100 p-0 hover-darkness border-top">
-                                          <a class="row p-0 m-0" href="${product.url}">
+                                          <a class="row p-0 m-0 text-dark" href="${product.url}">
                                             <div class="col-3 p-2">
                                                 <img class="w-100 image-wrapper" src="${product.imageUrl}" alt="${product.name}">
                                             </div>

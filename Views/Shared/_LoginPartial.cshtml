@@ -22,14 +22,24 @@
                 {
                     <span class="fa fa-user text-body"></span>
                 }
+                bool isAdmin = false;
+                if(user != null)
+                {
+                    var roles = await UserManager.GetRolesAsync(user);
+                    isAdmin = roles.Any(q => q == "Administrator");
+                }
+                
             }
         </button>
         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="dropdownAvatar">
-            <li class="dropdown-item"><a asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
-            <li class="dropdown-item"><a asp-controller="Invoice" asp-action="Index">Đơn hàng của bạn</a></li>
+            <li class="dropdown-item"><a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-dark fw-medium">Tài khoản</a></li>
+            @if(isAdmin) {
+                <li class="dropdown-item"><a asp-area="Admin" asp-controller="Dashboard" class="text-dark fw-medium">Quyền Admin</a></li>
+            }
+            <li class="dropdown-item"><a asp-controller="Invoice" asp-action="Index" class="text-dark fw-medium">Đơn hàng của bạn</a></li>
             <li class="dropdown-item">
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <input id="logout" type="submit" class="text-danger border-0 w-100 bg-transparent text-start p-0" title="Đăng xuất" value="Đăng xuất"/>
+                    <input id="logout" type="submit" class="text-danger border-0 w-100 bg-transparent text-start p-0 text-danger fw-medium" title="Đăng xuất" value="Đăng xuất" />
                 </form>
             </li>
 

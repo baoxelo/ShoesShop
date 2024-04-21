@@ -32,14 +32,14 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = " {0} phải có đọ dài tối thiểu {2} kí tự và tối đa {1} kí tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Mật khẩu mới")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Nhập lại mật khẩu")]
+            [Compare("NewPassword", ErrorMessage = "Mật khẩu không trùng khớp")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -85,7 +85,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = "Đổi mật khẩu thành công !";
 
             return RedirectToPage();
         }

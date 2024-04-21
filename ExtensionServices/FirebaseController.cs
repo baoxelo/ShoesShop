@@ -21,7 +21,13 @@ namespace ShoesShop.ExtensionServices
         }
         public async Task<string> UploadImagetoFirebase(IFormFile file, string fileName)
         {
-            FileStream? stream = null;
+            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data/Images");
+            if (!Directory.Exists(directoryPath))
+            {
+                // Nếu thư mục chưa tồn tại, tạo thư mục mới
+                Directory.CreateDirectory(directoryPath);
+            }
+            FileStream ? stream = null;
             using (stream = new FileStream(Path.Combine("Data/Images/", fileName), FileMode.Create))
             {
                 await file.CopyToAsync(stream);

@@ -40,7 +40,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            StatusMessage = result.Succeeded ? "Cám ơn bạn đã xác thực email" : "Xảy ra lỗi khi xác thực email";
             return Page();
         }
     }

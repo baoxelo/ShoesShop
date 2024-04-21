@@ -6,12 +6,12 @@ using ShoesShop.Services;
 using ShoesShop;
 using Microsoft.AspNetCore.Identity;
 using ShoesShop.Configuration;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite("filename=Data/Database/database.db"));
-/*builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));*/
+builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<FirebaseController>();
@@ -36,6 +36,7 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions => {
     googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
     // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
     googleOptions.CallbackPath = "/Login-Google";
+    googleOptions.ClaimActions.MapJsonKey("image", "picture");
 });
 builder.Services.Configure<SecurityStampValidatorOptions>(options =>
 {
