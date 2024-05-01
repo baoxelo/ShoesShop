@@ -88,7 +88,7 @@
                             <a asp-controller="Product" asp-action="Index" asp-route-slug="@product.Slug" class="product-card card">
                                 <img src="@Html.DisplayFor(productItem => product.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => product.Name)" />
                                 <div class="card-body">
-                                    <h5 class="card-title">@Html.DisplayFor(productItem => product.Name)</h5>
+                                    <h5 class="card-title product-item-name">@Html.DisplayFor(productItem => product.Name)</h5>
                                     @if (product.Discount.Percent != 0)
                                     {
                                         <div class="d-lg-flex d-md-block justify-content-between">
