@@ -49,6 +49,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Identity\Pages\Account\Manage\Shared\" />
     <Folder Include="Data\Database\" />
+    <Folder Include="Data\Images\" />
   </ItemGroup>
 
   <ItemGroup>

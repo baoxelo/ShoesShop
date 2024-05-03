@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
 
 <div class="container container-wrapper product-wrapper py-3 px-0">
-    <h2 class="text-center pb-4 text-uppercase">Sản phẩm dành cho nam</h2>
+    <h2 class="text-center py-4 text-uppercase">Sản phẩm nam</h2>
 
     @foreach (var category in Model)
     {
@@ -12,12 +12,10 @@
                 <hr />
             </div>
             <div class="row product-carousel">
-                <button title="product-carousel-left" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
-                <button title="product-carousel-right" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
-                <div class="row product-carousel-list">
+                <div class="row ">
                     @foreach (var item in category.Products)
                     {
-                        <div class="product-item col-xl-3 col-md-4 col-6 px-3">
+                        <div class="product-item col-xl-3 col-md-4 col-6 px-3 my-3">
                             @if (item.Discount.Percent != 0)
                             {
                                 <i class="fa-solid fa-certificate product-item-saleIcon"></i>

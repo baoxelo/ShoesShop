@@ -2,33 +2,35 @@
 @{
     ViewData["Title"] = "CreateProductItem";
 }
+<div class="admin-body-wrapper">
 
-<h1>Thêm size và số lượng cho sản phẩm</h1>
-<partial name="_StatusMessage" model="@TempData["StatusMessage"]"></partial>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateProductItem" >
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @for(int i = 0; i< Model.Count(); i++)
-            {
-                @Html.HiddenFor(model => Model[i].Id, Model[i].Id)
-                @Html.HiddenFor(model => Model[i].SizeId, Model[i].SizeId)
-                @Html.HiddenFor(model => Model[i].ProductId, Model[i].ProductId)
+    <h1>Thêm size và số lượng cho sản phẩm</h1>
+    <partial name="_StatusMessage" model="@TempData["StatusMessage"]"></partial>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateProductItem">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    @Html.HiddenFor(model => Model[i].Id, Model[i].Id)
+                    @Html.HiddenFor(model => Model[i].SizeId, Model[i].SizeId)
+                    @Html.HiddenFor(model => Model[i].ProductId, Model[i].ProductId)
+                    <div class="form-group">
+                        <label>Size : @Html.DisplayFor(modelItem => Model[i].Size.Name)</label>
+                        <label asp-for="@Model[i].Quantity" class="control-label"></label>
+                        <input asp-for="@Model[i].Quantity" min="0" class="form-control" />
+                        <span asp-validation-for="@Model[i].Quantity" class="text-danger"></span>
+                    </div>
+                }
                 <div class="form-group">
-                    <label>Size : @Html.DisplayFor(modelItem => Model[i].Size.Name)</label>
-                    <label asp-for="@Model[i].Quantity" class="control-label"></label>
-                    <input asp-for="@Model[i].Quantity" min="0" class="form-control" />
-                    <span asp-validation-for="@Model[i].Quantity" class="text-danger"></span>
+                    <input type="submit" value="Hoàn tất" class="btn btn-primary" />
                 </div>
-            }
-            <div class="form-group">
-                <input type="submit" value="Hoàn tất" class="btn btn-primary" />
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
+</div>
 @section Scripts {
     <script>
         function previewImage() {

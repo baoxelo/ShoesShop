@@ -82,12 +82,14 @@
 
     // Carosel product
     $('.product-carousel-left').click(function () {
-        var width = $(this).closest('.product-carousel').find('.product-item').first().outerWidth();
-        $(this).closest('.product-carousel').find('.product-carousel-list').animate({ scrollLeft: '-=' + width }, 400);
+        var productCarousel = $(this).closest('.product-carousel')
+        var width = productCarousel.find('.product-item').first().outerWidth();
+        productCarousel.find('.product-carousel-list').animate({ scrollLeft: '-=' + width }, 400);
     });
     $('.product-carousel-right').click(function () {
-        var width = $(this).closest('.product-carousel').find('.product-item').first().outerWidth();
-        $(this).closest('.product-carousel').find('.product-carousel-list').animate({ scrollLeft: '+=' + width }, 400);
+        var productCarousel = $(this).closest('.product-carousel')
+        var width = productCarousel.find('.product-item').first().outerWidth();
+        productCarousel.find('.product-carousel-list').animate({ scrollLeft: '+=' + width }, 400);
     });
     
 

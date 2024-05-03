@@ -74,8 +74,8 @@
                 <hr />
             </div>
             <div class="row product-carousel">
-                <button class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
-                <button class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                <button title="Sang trái" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                <button title="Sang phải" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
                 <div class="row product-carousel-list">
                     @foreach (var product in Model.Category.Products)
                     {
@@ -196,7 +196,4 @@
             
         });
     </script>
-
-
-    
 }
