@@ -3,37 +3,40 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="admin-body-wrapper">
 
-<h1>Tạo danh mục mới</h1>
-<partial name="_StatusMessage" model="@TempData["StatusMessage"]"></partial>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group form-group-image w-50 p-0">
-                <label for="create-category-image-@Html.DisplayFor(category => Model.Id)" asp-for="@Model.ImageFile" class="control-label btn w-100 image-wrapper" ></label>
-                <input onchange="mainModule.setImageToInput(this)" id="create-category-image-@Html.DisplayFor(category => Model.Id)" type="file" asp-for="@Model.ImageFile" class="form-control" style="display: none;" />
-                <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Tạo mới" class="btn btn-primary" />
-            </div>
-        </form>
+    <h1>Tạo danh mục mới</h1>
+    <partial name="_StatusMessage" model="@TempData["StatusMessage"]"></partial>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group form-group-image w-50 p-0">
+                    <label for="create-category-image-@Html.DisplayFor(category => Model.Id)" asp-for="@Model.ImageFile" class="control-label btn w-100 image-wrapper"></label>
+                    <input onchange="mainModule.setImageToInput(this)" id="create-category-image-@Html.DisplayFor(category => Model.Id)" type="file" asp-for="@Model.ImageFile" class="form-control" style="display: none;" />
+                    <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Quay lại quản lí danh mục</a>
-</div>
+    <div>
+        <a asp-action="Index">Quay lại quản lí danh mục</a>
+    </div>
 
+
+</div>

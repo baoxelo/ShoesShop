@@ -104,7 +104,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                     ModelState.AddModelError("Ảnh sản phẩm", "Ảnh sản phẩm là bắt buộc !");
                     return View(product);
                 }
-                var imageLink = await _firebaseController.UploadImagetoFirebase(product.ImageFile, product.Name);
+                var imageLink = await _firebaseController.UploadImagetoFirebase(product.ImageFile, product.Name, "Products");
                 var discount = _context.Discounts.FirstOrDefault(d => d.Id == product.DiscountId);
                 if(discount == null)
                 {
@@ -205,7 +205,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                     if (file != null)
                     {
                         var label = (string)(product.Name + listProductImages[i].Id.ToString());
-                        var link = await _firebaseController.UploadImagetoFirebase(file, label);
+                        var link = await _firebaseController.UploadImagetoFirebase(file, label, "Products");
                         listProductImages[i].ImageLink = link;
                     }
                     else
@@ -282,7 +282,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                 {
                     if(updateProduct.ImageFile != null)
                     {
-                        var imageLink = await _firebaseController.UploadImagetoFirebase(updateProduct.ImageFile, updateProduct.Name);
+                        var imageLink = await _firebaseController.UploadImagetoFirebase(updateProduct.ImageFile, updateProduct.Name, "Products");
                         product.ImageLink = imageLink;
                     }
                     // Update product 
@@ -308,7 +308,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                             if (file != null)
                             {
                                 var label = (string)(product.Name + updateProduct.Images[i].Id.ToString());
-                                var link = await _firebaseController.UploadImagetoFirebase(file, label);
+                                var link = await _firebaseController.UploadImagetoFirebase(file, label, "Products");
                                 updateProduct.Images[i].ImageLink = link;
                             }
                         }
@@ -393,14 +393,14 @@ namespace ShoesShop.Areas.Admin.Controllers
             _context.ProductItems.RemoveRange(items);
 
             // Remove product avatar 
-            await _firebaseController.DeleteImagetoFirebase(product.Name);
+            await _firebaseController.DeleteImagetoFirebase(product.Name, "Products");
 
             // Remove images on Firebase
             var images = _context.ProductImages.Where(q => q.ProductId == id);
             foreach (var image in images)
             {
                 var label = (string)(product.Name + image.Id.ToString());
-                await _firebaseController.DeleteImagetoFirebase(label);
+                await _firebaseController.DeleteImagetoFirebase(label, "Products");
             }
             // Remove product images
             _context.ProductImages.RemoveRange(images);

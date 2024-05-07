@@ -107,7 +107,7 @@ namespace ShoesShop.Areas.Identity.Pages.Account.Manage
             if(Input.ImageFile != null) 
             {
                 var fileName = user.Email;
-                var imageLink = await _firebaseController.UploadImagetoFirebase(Input.ImageFile, fileName);
+                var imageLink = await _firebaseController.UploadImagetoFirebase(Input.ImageFile, fileName, "Users");
                 user.Avatar = imageLink;
             }
             var result = await _userManager.UpdateAsync(user);

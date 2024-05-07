@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
 
-<div class="container container-wrapper product-wrapper py-3 px-0">
-    <h2 class="text-center py-4 text-uppercase">Sản phẩm nam</h2>
+<div class="container container-wrapper product-wrapper py-3 px-0 bg-transparent">
 
     @foreach (var category in Model)
     {
@@ -9,9 +8,8 @@
         {
             <div class="px-3">
                 <h5 class="category-item-title">@Html.DisplayFor(model => category.Name)</h5>
-                <hr />
             </div>
-            <div class="row product-carousel">
+            <div class="row pb-5 product-carousel">
                 <div class="row ">
                     @foreach (var item in category.Products)
                     {
@@ -45,6 +43,7 @@
                     }
                 </div>
             </div>
+            
         }
 
     }

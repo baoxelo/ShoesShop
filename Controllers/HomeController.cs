@@ -70,8 +70,8 @@ namespace ShoesShop.Controllers
 
             return View(categories);
         }
-        [ActionName("Men")]
-        public async Task<IActionResult> MenPage ()
+        [ActionName("men")]
+        public async Task<IActionResult> MenPage (string slug)
         {
             // Load card 
             if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
@@ -99,12 +99,15 @@ namespace ShoesShop.Controllers
                     }
                 }
             }
-
             var categories = await _context.Categories.ToListAsync();
-            var gender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nữ");
+            if(slug != null)
+            {
+                categories = categories.Where(q => q.Slug == slug).ToList();
+            }
+            var removeGender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nữ");
             foreach (var category in categories)
             {
-                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != gender.Id).Include(q => q.Discount).ToListAsync();
+                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != removeGender.Id).Include(q => q.Discount).ToListAsync();
             }
 
             return View(categories);
@@ -141,10 +144,10 @@ namespace ShoesShop.Controllers
             }
 
             var categories = await _context.Categories.ToListAsync();
-            var gender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nam");
+            var removeGender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nam");
             foreach (var category in categories)
             {
-                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != gender.Id).Include(q => q.Discount).ToListAsync();
+                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != removeGender.Id).Include(q => q.Discount).ToListAsync();
             }
 
             return View(categories);

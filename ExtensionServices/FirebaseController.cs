@@ -19,7 +19,7 @@ namespace ShoesShop.ExtensionServices
             _context = context;
             _hostEnvironment = hostEnvironment;
         }
-        public async Task<string> UploadImagetoFirebase(IFormFile file, string fileName)
+        public async Task<string> UploadImagetoFirebase(IFormFile file, string fileName, string directory)
         {
             string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data/Images");
             if (!Directory.Exists(directoryPath))
@@ -47,6 +47,7 @@ namespace ShoesShop.ExtensionServices
                         ThrowOnCancel = true // when you cancel the upload, exception is thrown. By default no exception is thrown
                     })
                     .Child("images")
+                    .Child(directory)
                     .Child(fileName)
                     .PutAsync(stream, cancellation.Token);
 
@@ -65,9 +66,9 @@ namespace ShoesShop.ExtensionServices
             }
         }
 
-        public async Task DeleteImagetoFirebase(string fileName)
+        public async Task DeleteImagetoFirebase(string fileName, string directory)
         {
-            
+            string path = Path.Combine(directory, fileName);
             // of course you can login using other method, not just email+password
             var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             var a = await auth.SignInWithEmailAndPasswordAsync(AuthEmail, AuthPassword);
@@ -82,7 +83,7 @@ namespace ShoesShop.ExtensionServices
                         ThrowOnCancel = true // when you cancel the upload, exception is thrown. By default no exception is thrown
                     })
                     .Child("images")
-                    .Child(fileName)
+                    .Child(path)
                     .DeleteAsync();
 
             try

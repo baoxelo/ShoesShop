@@ -71,7 +71,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "home",
-    pattern: "/trang-chu/{action}/{id?}",
+    pattern: "/trang-chu/{action}/{slug?}",
     defaults: new {controller = "Home", action = "Index" }
     );
 

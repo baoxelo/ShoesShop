@@ -64,7 +64,7 @@ namespace ShoesShop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var imageLink = await _firebaseController.UploadImagetoFirebase(slider.ImageFile, slider.Title);
+                var imageLink = await _firebaseController.UploadImagetoFirebase(slider.ImageFile, slider.Title, "Slides");
                 slider.ImageLink = imageLink;
                 slider.CreateDate = DateTime.Now;
                 slider.ModifyDate = DateTime.Now;

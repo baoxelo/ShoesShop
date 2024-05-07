@@ -28,7 +28,7 @@
                     }
                 }
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+            <button class=" carousel-control-prev" type="button" data-bs-target="#header-carousel"
                     data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -42,7 +42,22 @@
     </div>
     <!-- Carousel End -->
     <div class="container py-5 mt-5">
-
+        <div class="collection-wrapper">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
         @if(Model != null) {
             <div class="product-wrapper">
             </div>
@@ -83,10 +98,9 @@
             if (category.products && category.products.length > 0) {
                 $(".product-wrapper").append(`
                     <div class="px-3">
-                        <h5 class="category-item-title">${category.name}</h5>
-                        <hr />
+                        <h5 class="mb-3 category-item-title">${category.name}</h5>
                     </div>
-                    <div class="row product-carousel">
+                    <div class="row pb-5 product-carousel">
                         <button title="Sang trái" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
                         <button title="Sang phải" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
                         <div class="row product-carousel-list overflow-y-hidden">

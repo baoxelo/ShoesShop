@@ -18,12 +18,14 @@ namespace ShoesShop.Areas.Admin.Controllers
     {
         private readonly ConvertSlug _convertSlug;
         private readonly DatabaseContext _context;
+        private readonly FirebaseController _firebaseController;
         public override void OnActionExecuting(ActionExecutingContext context) => ViewData["MenuBar"] = "Categories";
 
-        public CategoriesController(DatabaseContext context, ConvertSlug convertSlug)
+        public CategoriesController(DatabaseContext context, ConvertSlug convertSlug, FirebaseController firebaseController)
         {
             _context = context;
             _convertSlug = convertSlug;
+            _firebaseController = firebaseController;
         }
 
         // GET: Admin/Categories
@@ -61,7 +63,7 @@ namespace ShoesShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,ImageFile")] Category category)
         {
             if (!ModelState.IsValid || category == null)
             {
@@ -72,7 +74,11 @@ namespace ShoesShop.Areas.Admin.Controllers
                 TempData["StatusMessage"] = $"Error: Danh mục này đã tồn tại {category.Name}";
                 return View(category);
             }
-
+            if (category.ImageFile != null)
+            {
+                var imageLink = await _firebaseController.UploadImagetoFirebase(category.ImageFile, category.Name, "Categories");
+                category.ImageLink = imageLink;
+            }
             category.Slug = _convertSlug.ConvertString2Slug(category.Name);
             category.CreateDate = DateTime.Now;
             category.ModifyDate = DateTime.Now;
@@ -121,6 +127,12 @@ namespace ShoesShop.Areas.Admin.Controllers
                     {
                         TempData["StatusMessage"] = $"Error: Danh mục này đã tồn tại {updateCategory.Name}";
                         return View(updateCategory);
+                    }
+
+                    if (category.ImageFile != null)
+                    {
+                        var imageLink = await _firebaseController.UploadImagetoFirebase(category.ImageFile, category.Name, "Categories");
+                        category.ImageLink = imageLink;
                     }
                     category.ModifyDate = DateTime.Now;
                     category.Name = updateCategory.Name;
@@ -177,6 +189,11 @@ namespace ShoesShop.Areas.Admin.Controllers
                 _context.Categories.Remove(category);
             }
             TempData["StatusMessage"] = $"Bạn đã xóa danh mục {category.Name}";
+
+            if (category.ImageFile != null)
+            {
+                await _firebaseController.DeleteImagetoFirebase(category.Name, "Categories");
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
