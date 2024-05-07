@@ -26,6 +26,10 @@ namespace ShoesShop.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if(_context == null)
+            {
+                return NotFound();
+            }
 
             string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "database.db");
             _logger.LogInformation(dbPath);
@@ -56,7 +60,10 @@ namespace ShoesShop.Controllers
                 }
             }
 
+            // Get Collection
             var categories = await _context.Categories.ToListAsync();
+            TempData["Categories"] = categories;
+
             foreach (var category in categories)
             {
                 category.Products = await _context.Products.Where(q => q.CategoryId == category.Id).Include(q => q.Discount).ToListAsync();
@@ -99,8 +106,12 @@ namespace ShoesShop.Controllers
                     }
                 }
             }
+
+            // Get Collection
             var categories = await _context.Categories.ToListAsync();
-            if(slug != null)
+            TempData["Categories"] = categories;
+
+            if (slug != null)
             {
                 categories = categories.Where(q => q.Slug == slug).ToList();
             }
