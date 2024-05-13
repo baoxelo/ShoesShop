@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
 
 <div class="container container-wrapper product-wrapper py-3 px-0 bg-transparent">
-    <partial name="_Collection"></partial>
+    <partial name="_CollectionPartial"></partial>
     @foreach (var category in Model)
     {
         if (category.Products != null && category.Products.Count() > 0)

@@ -69,6 +69,9 @@ namespace ShoesShop.Controllers
                 category.Products = await _context.Products.Where(q => q.CategoryId == category.Id).Include(q => q.Discount).ToListAsync();
             }
 
+            var genders = await _context.Genders.ToListAsync();
+            TempData["Genders"] = genders;
+
             // Get Sliders
             var slider = await _context.Slider.ToListAsync();
             TempData["Sliders"] = slider;
@@ -78,7 +81,7 @@ namespace ShoesShop.Controllers
             return View(categories);
         }
         [ActionName("men")]
-        public async Task<IActionResult> MenPage (string slug)
+        public async Task<IActionResult> Collection (string slug)
         {
             // Load card 
             if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
@@ -111,51 +114,14 @@ namespace ShoesShop.Controllers
             var categories = await _context.Categories.ToListAsync();
             TempData["Categories"] = categories;
 
+            var genders = await _context.Genders.ToListAsync();
+            TempData["Genders"] = genders;
+
             if (slug != null)
             {
                 categories = categories.Where(q => q.Slug == slug).ToList();
             }
             var removeGender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nữ");
-            foreach (var category in categories)
-            {
-                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != removeGender.Id).Include(q => q.Discount).ToListAsync();
-            }
-
-            return View(categories);
-        }
-
-        [ActionName("Women")]
-        public async Task<IActionResult> WomenPage()
-        {
-            // Load card 
-            if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
-            {
-                string userId;
-                var user = await _userManager.GetUserAsync(User);
-                if (user != null)
-                {
-                    userId = await _userManager.GetUserIdAsync(user);
-                    if (userId != null)
-                    {
-                        // Get Cart
-                        var cart = await _context.Carts.FirstOrDefaultAsync(q => q.AppUserId == userId);
-                        if (cart != null)
-                        {
-                            cart.CartItems = await _context.CartItems.Where(q => q.CartId == cart.Id)
-                                .Include(q => q.ProductItem)
-                                    .ThenInclude(p => p.Size)
-                                    .Include(q => q.ProductItem)
-                                    .ThenInclude(p => p.Product)
-                                    .ToListAsync();
-                        }
-                        TempData["Cart"] = cart;
-
-                    }
-                }
-            }
-
-            var categories = await _context.Categories.ToListAsync();
-            var removeGender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nam");
             foreach (var category in categories)
             {
                 category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != removeGender.Id).Include(q => q.Discount).ToListAsync();

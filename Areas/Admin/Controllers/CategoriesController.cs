@@ -110,7 +110,7 @@ namespace ShoesShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Status")] Category updateCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ImageFile,Status")] Category updateCategory)
         {
             if (id != updateCategory.Id)
             {
@@ -129,9 +129,9 @@ namespace ShoesShop.Areas.Admin.Controllers
                         return View(updateCategory);
                     }
 
-                    if (category.ImageFile != null)
+                    if (updateCategory.ImageFile != null)
                     {
-                        var imageLink = await _firebaseController.UploadImagetoFirebase(category.ImageFile, category.Name, "Categories");
+                        var imageLink = await _firebaseController.UploadImagetoFirebase(updateCategory.ImageFile, updateCategory.Name, "Categories");
                         category.ImageLink = imageLink;
                     }
                     category.ModifyDate = DateTime.Now;

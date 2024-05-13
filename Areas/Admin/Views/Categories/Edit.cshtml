@@ -11,9 +11,17 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group form-group-image w-50 p-0">
+                    <label for="edit-category-image-@Html.DisplayFor(category => Model.Id)" asp-for="@Model.ImageFile" class="control-label btn btn-chang-image w-100 p-0">
+                        <img class="w-100 image-wrapper" src="@Model.ImageLink" alt="@Model.Name" />
+                    </label>
+                    <input onchange="mainModule.setImageToInput(this)" id="edit-category-image-@Html.DisplayFor(category => Model.Id)" type="file" asp-for="@Model.ImageFile" class="form-control" style="display: none;" />
+                    <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />

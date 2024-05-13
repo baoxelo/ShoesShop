@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ShoesShop.Models.Category>
+@{
+    var categories = (IEnumerable<ShoesShop.Models.Category>)TempData["Categories"];
+    var genders = (IEnumerable<ShoesShop.Models.Gender>)TempData["Genders"];
+}
+<div class="mb-5 px-3">
+    <div class="d-flex">
+        @if(genders != null)
+        {
+            foreach (var gender in genders)
+            {
+                <div class="collection-gender">
+                    <h5 class="collection-gender-title">@gender.GenderType</h5>
+                </div>
+            }
+        }
+    </div>
+    <div class="w-50 d-flex collection-category-wrapper">
+        @if(categories != null)
+        {
+            foreach (var category in categories)
+            {
+                <a href="#" class="col-2 collection-category-item">
+                    <div class="collection-category-image">
+                        <img class="image-wrapper w-100" src="@category.ImageLink" alt="@category.ImageLink" />
+                    </div>
+                    <h5 class="collection-category-name">@category.Name</h5>
+                </a>
+            }
+        }
+    </div>
+</div>
+@section Scripts {
+    <script defer>
+
+    </script>
+}
