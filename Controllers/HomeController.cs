@@ -80,8 +80,7 @@ namespace ShoesShop.Controllers
 
             return View(categories);
         }
-        [ActionName("men")]
-        public async Task<IActionResult> Collection (string slug)
+        public async Task<IActionResult> Collection (string? category, string? gender)
         {
             // Load card 
             if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
@@ -117,14 +116,26 @@ namespace ShoesShop.Controllers
             var genders = await _context.Genders.ToListAsync();
             TempData["Genders"] = genders;
 
-            if (slug != null)
+            var categoryItem = await _context.Categories.FirstOrDefaultAsync(q => q.Slug == category);
+            if (categoryItem != null)
             {
-                categories = categories.Where(q => q.Slug == slug).ToList();
+                categories = categories.Where(q => q.Slug == categoryItem.Slug).ToList();
             }
-            var removeGender = await _context.Genders.SingleOrDefaultAsync(q => q.GenderType == "Nữ");
-            foreach (var category in categories)
+
+            var genderItem = await _context.Genders.FirstOrDefaultAsync(q => q.GenderType == gender);
+            if (genderItem != null)
             {
-                category.Products = await _context.Products.Where(q => q.CategoryId == category.Id && q.GenderId != removeGender.Id).Include(q => q.Discount).ToListAsync();
+                foreach (var item in categories)
+                {
+                    item.Products = await _context.Products.Where(q => q.CategoryId == item.Id && ( q.Gender.GenderType == genderItem.GenderType || q.Gender.GenderType == "Unisex")).Include(q => q.Discount).ToListAsync();
+                }
+            }
+            else
+            {
+                foreach (var item in categories)
+                {
+                    item.Products = await _context.Products.Where(q => q.CategoryId == item.Id).Include(q => q.Discount).ToListAsync();
+                }
             }
 
             return View(categories);

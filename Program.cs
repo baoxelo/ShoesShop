@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
@@ -70,10 +71,17 @@ app.MapControllerRoute(
 
 
 app.MapControllerRoute(
+    name: "collection",
+    pattern: "/trang-chu/danh-muc/",
+    defaults: new { controller = "Home", action = "Collection" }
+    );
+
+app.MapControllerRoute(
     name: "home",
-    pattern: "/trang-chu/{action}/{slug?}",
+    pattern: "/trang-chu/{action=Index}/{slug?}",
     defaults: new {controller = "Home", action = "Index" }
     );
+
 
 app.MapControllerRoute(
     name: "cart",

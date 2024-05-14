@@ -44,6 +44,8 @@ a {
 
 .category-item-title {
   text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
 
 .product-item {
@@ -286,6 +288,12 @@ a {
   padding: 25px;
   border: 1px solid #e4e7e6;
   background-color: #fff;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .collection-gender {
+    padding: 15px;
+  }
 }
 .collection-gender.active {
   border-bottom: 1px solid #fff;
@@ -294,12 +302,18 @@ a {
   color: #4582ec;
   filter: contrast(1.5) brightness(0.8);
   text-decoration: underline;
+  text-decoration-thickness: 0.15rem;
   text-underline-offset: 0.4rem;
 }
 .collection-gender .collection-gender-title {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
+}
+@media (max-width: 480px) {
+  .collection-gender .collection-gender-title {
+    font-size: 1.2rem;
+  }
 }
 
 .collection-category-wrapper {
@@ -313,6 +327,19 @@ a {
   margin-right: 25px;
   margin-left: 25px;
 }
+.collection-category-wrapper .collection-category-item.active .collection-category-image {
+  filter: brightness(0.9);
+}
+.collection-category-wrapper .collection-category-item.active .collection-category-name {
+  color: #4582ec;
+  font-weight: 400;
+}
+@media (max-width: 480px) {
+  .collection-category-wrapper .collection-category-item {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
 .collection-category-wrapper .collection-category-item:hover {
   filter: brightness(0.9);
 }
@@ -323,12 +350,17 @@ a {
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid #e4e7e6;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .collection-category-wrapper .collection-category-item .collection-category-name {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 300;
   color: #000;
   margin-bottom: 5px;
   text-align: center;
+}
+@media (max-width: 480px) {
+  .collection-category-wrapper .collection-category-item .collection-category-name {
+    font-size: 0.9rem;
+  }
 }

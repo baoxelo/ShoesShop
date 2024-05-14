@@ -1,26 +1,29 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     var categories = (IEnumerable<ShoesShop.Models.Category>)TempData["Categories"];
     var genders = (IEnumerable<ShoesShop.Models.Gender>)TempData["Genders"];
+    string genderParam = HttpContextAccessor.HttpContext.Request.Query["gender"];
+    string categoryParam = HttpContextAccessor.HttpContext.Request.Query["category"];
 }
-<div class="mb-5 px-3">
+<div class="mb-5 px-md-3">
     <div class="d-flex">
         @if(genders != null)
         {
             foreach (var gender in genders)
             {
-                <div class="collection-gender">
+                <div class="collection-gender @(gender.GenderType == genderParam ? "active" : ' ')" attr-data="@gender.GenderType">
                     <h5 class="collection-gender-title">@gender.GenderType</h5>
                 </div>
             }
         }
     </div>
-    <div class="w-50 d-flex collection-category-wrapper">
+    <div class="w-100 d-flex collection-category-wrapper">
         @if(categories != null)
         {
             foreach (var category in categories)
             {
-                <a href="#" class="col-2 collection-category-item">
+                <a href="@Url.Action("Collection", new { category = category.Slug, gender = "Unisex" })" class="col-2 col-lg-1 collection-category-item @(category.Slug == categoryParam ? "active" : ' ')">
                     <div class="collection-category-image">
                         <img class="image-wrapper w-100" src="@category.ImageLink" alt="@category.ImageLink" />
                     </div>
@@ -30,8 +33,3 @@
         }
     </div>
 </div>
-@section Scripts {
-    <script defer>
-
-    </script>
-}
