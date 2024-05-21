@@ -1,50 +1,192 @@
 ﻿@model IEnumerable<ShoesShop.Models.Category>
-
+@{
+    var sizes = (IEnumerable<ShoesShop.Models.Size>)TempData["Sizes"];
+}
 <div class="container container-wrapper product-wrapper py-3 px-0 bg-transparent">
     <partial name="_CollectionPartial"></partial>
-    @foreach (var category in Model)
-    {
-        if (category.Products != null && category.Products.Count() > 0)
-        {
-            <div class="px-3">
-                <h5 class="category-item-title">@Html.DisplayFor(model => category.Name)</h5>
-            </div>
-            <div class="row pb-5 product-carousel">
-                <div class="row ">
-                    @foreach (var item in category.Products)
+    <div class="px-3 my-5 filter-wrapper">
+        <div class="filter-icon"><span class="fa fa-filter text-body"></span> Bộ lọc</div>
+        <div class="dropdown filter-sizes">
+            <button class="dropdown-toggle filter-sizes-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Kích thước
+            </button>
+            <ul class="dropdown-menu filter-sizes-menu">
+                @if(sizes != null)
+                {
+                    foreach(var size in sizes)
                     {
-                        <div class="product-item col-xl-3 col-md-4 col-6 px-3 my-3">
-                            @if (item.Discount.Percent != 0)
-                            {
-                                <i class="fa-solid fa-certificate product-item-saleIcon"></i>
-                                <p class="product-item-saleIcon">@Html.DisplayFor(productItem => item.Discount.Percent)%</p>
-                            }
-                            <a asp-controller="Product" asp-action="Index" asp-route-slug="@item.Slug" class="product-card card">
-                                <img src="@Html.DisplayFor(productItem => item.ImageLink)" class="card-img-top" alt="@Html.DisplayFor(productItem => item.Name)" />
-                                <div class="card-body">
-                                    <h5 class="card-title">@Html.DisplayFor(productItem => item.Name)</h5>
-                                    @if (item.Discount.Percent != 0)
-                                    {
-                                        <div class="d-lg-flex d-md-block justify-content-between">
-                                            <p class="product-card-price card-text text-danger fw-bold d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => item.CurrentPrice)</span> đ</p>
-                                            <p class="product-card-price card-text text-decoration-line-through d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => item.Price)</span> đ</p>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="d-lg-flex d-md-block justify-content-between">
-                                            <p class="product-card-price card-text text-danger fw-bold d-inline-block"><span class="number-with-comma">@Html.DisplayFor(productItem => item.CurrentPrice)</span> đ</p>
-                                            <p> </p>
-                                        </div>
-                                    }
-                                </div>
-                            </a>
-                        </div>
+                        <li class="filter-size-option" data-size="@size.Name">@size.Name</li>
                     }
-                </div>
-            </div>
-            
-        }
+                }
+            </ul>
+        </div>
 
+        <div class="dropdown filter-sizes">
+            <button class="dropdown-toggle filter-sizes-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Giá
+            </button>
+            <ul class="dropdown-menu filter-sizes-menu">
+                @if (sizes != null)
+                {
+                    <li class="number-with-comma">0 - 500.000</li>
+                    <li class="number-with-comma">500.000 - 1.000.000</li>
+                    <li class="number-with-comma">1.000.000 - 1.500.000</li>
+                    <li class="number-with-comma">1.500.000 - 2.000.000</li>
+                }
+            </ul>
+        </div>
+
+        <div class="filter-active w-100"></div>
+    </div>
+    @if (Model != null)
+    {
+        <div class="collection-product-wrapper">
+        </div>
     }
 </div>
+
+
+@section Scripts {
+    <script defer>
+        // Define an object to hold filter functions
+        const filterFunc = {
+            // Function to render products based on filters
+            renderProduct: () => {
+                var filteredCategories = categories.map((category) => {
+                    var filteredProducts = category.products.filter((product) => {
+                        return filterArray.every((filter) => {
+                            return Array.isArray(product.sizes) && product.sizes.includes(filter);
+                        });
+                    });
+                    return {
+                        name: category.name,
+                        description: category.description,
+                        products: filteredProducts
+                    };
+                }).filter((category) => {
+                    return category.products.length > 0;
+                });
+
+                $(".collection-product-wrapper").html(``);
+                filteredCategories.forEach((category) => {
+                    if (category.products && category.products.length > 0) {
+                        $(".collection-product-wrapper").append(`
+                                <div class="px-3">
+                                    <h5 class="mb-3 category-item-title">${category.name}</h5>
+                                </div>
+                                <div class="row pb-5 product-carousel">
+                                    <button title="Sang trái" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                                    <button title="Sang phải" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                                    <div class="row product-carousel-list overflow-y-hidden">
+                                        ${category.products.map(product => `
+                                            <div class="product-item col-xl-3 col-md-4 col-6 px-1 px-md-3">
+                                                ${product.discount !== 0 ? `<i class="fa-solid fa-certificate product-item-saleIcon"></i><p class="product-item-saleIcon">${product.discount}%</p>` : ''}
+                                                <a href="/san-pham/${product.slug}" class="product-card card">
+                                                    <img src="${product.image}" class="card-img-top" alt="${product.name}" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${product.name}</h5>
+                                                        <div class="d-lg-flex d-md-block justify-content-between">
+                                                            <p class="product-card-price card-text text-danger fw-bold d-inline-block"><span class="number-with-comma">${product.currentPrice}</span> đ</p>
+                                                            ${product.discount !== 0 ? `<p class="product-card-price card-text text-decoration-line-through d-inline-block"><span class="number-with-comma">${product.price}</span> đ</p>` : ''}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `);
+                    }
+                });
+                filterFunc.formatNumbersWithComma();
+            },
+            // Function to format numbers with commas
+            formatNumbersWithComma:  () => {
+                $('.number-with-comma').each(function () {
+                    var originalNumber = $(this).text().trim();
+                    var formattedNumber = numeral(originalNumber).format('0,0');
+                    $(this).text(formattedNumber);
+                });
+            },
+
+            // Function to render active filters
+            renderFilter: () => {
+                $('.filter-active').html(``);
+                filterArray.forEach((item) => {
+                    $('.filter-active').append(`
+                            <div class="filter-active-item">
+                                <p>${item}</p>
+                                <span class="fa fa-times filter-remove" onClick="removeFilter('${item}')"></span>
+                            </div>
+                        `);
+                });
+            },
+        };
+
+        // Define categories array
+        var categories = [
+        @foreach (var category in Model)
+        {
+            <text>
+                {
+                    name: `@category.Name`,
+                    description: `@category.Description`,
+                    products: [
+                @foreach (var product in category.Products)
+                {
+                    <text>
+                            {
+                                name: `@product.Name`,
+                                description: `@product.Description`,
+                                discount: @product.Discount.Percent,
+                                price: @product.Price,
+                                currentPrice: @product.CurrentPrice,
+                                image: `@product.ImageLink`,
+                                slug: `@product.Slug`,
+                                sizes: [
+                        @foreach (var item in product.Items)
+                        {
+                            if (item.Quantity != 0)
+                            {
+                                <text>
+                                            `@item.Size.Name`,
+                                </text>
+                            }
+                        }
+                                                    ]
+                            },
+                    </text>
+                }
+                                ],
+                },
+            </text>
+        }
+            ];
+
+
+        // Initialize filter array
+        var filterArray = [];
+
+        // Add event listener for filter options
+        $('.filter-size-option').on('click', function () {
+            var size = $(this).attr('data-size');
+            if (!filterArray.includes(size)) {
+                filterArray.push(size);
+                filterFunc.renderProduct();
+                filterFunc.renderFilter();
+            }
+        });
+
+        // Function to remove a filter
+        const removeFilter = (size) => {
+            filterArray = filterArray.filter((item) => {
+                return item != size;
+            });
+            filterFunc.renderProduct();
+            filterFunc.renderFilter();
+        };
+
+        // Initial render of products
+        filterFunc.renderProduct(categories);
+    </script>
+}

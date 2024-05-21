@@ -206,6 +206,69 @@ a {
   box-shadow: none;
 }
 
+.filter-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.filter-wrapper .filter-icon {
+  padding: 0 10px;
+  margin-right: 20px;
+}
+.filter-wrapper .filter-icon span {
+  color: #ccc;
+  margin-right: 5px;
+}
+.filter-wrapper .dropdown {
+  min-width: 150px;
+}
+.filter-wrapper .dropdown .dropdown-toggle {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.filter-wrapper .dropdown .dropdown-menu {
+  min-width: 500px;
+}
+.filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ccc;
+  margin: 0 7px;
+  text-align: center;
+  border-radius: 50%;
+  user-select: none;
+  cursor: pointer;
+}
+.filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option:active {
+  background-color: #4582ec;
+  color: #fff;
+}
+.filter-wrapper .filter-active {
+  padding-top: 20px;
+}
+.filter-wrapper .filter-active .filter-active-item {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  background-color: #4582ec;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.filter-wrapper .filter-active .filter-active-item p {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+.filter-wrapper .filter-active .filter-active-item .filter-remove {
+  margin-left: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 .cart-partial {
   width: 420px;
   box-shadow: 1px 1px 1px #ccc;

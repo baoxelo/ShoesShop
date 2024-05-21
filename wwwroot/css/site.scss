@@ -112,7 +112,7 @@ a {
 .product-card-price {
     font-size: 1.3rem;
 }
-// Product Page
+//*** Product Page ***//
 .product-image-wrapper {
     height: 450px;
     @media (max-width: 480px) { 
@@ -224,7 +224,85 @@ a {
     }
 }
 
+//*** Filter ***//
+.filter-wrapper {
+    display: flex;
+    flex-wrap: wrap;
 
+    .filter-icon {
+        padding: 0 10px;
+        margin-right: 20px;
+
+        span {
+            color: #ccc;
+            margin-right: 5px;
+        }
+    }
+
+    .dropdown {
+        min-width: 150px;
+
+        .dropdown-toggle {
+            width: 100%;
+            background-color: $white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .dropdown-menu {
+            min-width: 500px;
+        }
+    }
+
+    .filter-sizes {
+
+        .filter-sizes-menu {
+            .filter-size-option {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                border: 1px solid #ccc;
+                margin: 0 7px;
+                text-align: center;
+                border-radius: 50%;
+                user-select: none;
+                cursor: pointer;
+
+                &:active {
+                    background-color: $primary;
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    .filter-active {
+        padding-top: 20px;
+
+        .filter-active-item {
+            display: inline-flex;
+            align-items:center;
+            color: $white;
+            background-color: $primary;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+
+            p {
+                color: $white;
+                font-size: 1rem;
+                line-height: 1rem;
+            }
+
+            .filter-remove {
+                margin-left: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
 
 
 

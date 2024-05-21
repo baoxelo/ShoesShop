@@ -130,21 +130,20 @@ $(document).ready(function () {
     
     $('.collection-gender').on('click', function () {
         $('.collection-gender').removeClass('active');
+        $('.collection-category-item').removeClass('active');
         $(this).addClass('active');
 
         var gender = $(this).attr('attr-data');
 
         var categories = $('.collection-category-item');
         categories.each(function () {
-            var category = $(this); // Chuyển đổi thành đối tượng jQuery
+            var category = $(this); 
 
             var currentHref = category.attr('href');
             var url = new URL(currentHref, window.location.origin);
 
-            // Thêm hoặc cập nhật tham số 'gender' trong URL
-            url.searchParams.set('gender', gender); // Giả sử 'gender' là một biến chứa giá trị bạn muốn thêm vào
+            url.searchParams.set('gender', gender); 
 
-            // Cập nhật thuộc tính 'href' của thẻ a với URL mới
             category.attr('href', url.toString());
         });
     });

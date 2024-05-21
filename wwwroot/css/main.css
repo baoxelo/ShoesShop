@@ -73,10 +73,6 @@ input:focus {
   display: none;
 }
 
-.dropdown-menu {
-  top: calc(100% + 10px) !important;
-}
-
 /***** Accordion ****/
 .accordion-button {
   box-shadow: none !important;

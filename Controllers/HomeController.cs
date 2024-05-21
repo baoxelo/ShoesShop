@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ShoesShop.ExtensionServices;
 using ShoesShop.Models;
 using System.Diagnostics;
@@ -128,6 +129,11 @@ namespace ShoesShop.Controllers
                 foreach (var item in categories)
                 {
                     item.Products = await _context.Products.Where(q => q.CategoryId == item.Id && ( q.Gender.GenderType == genderItem.GenderType || q.Gender.GenderType == "Unisex")).Include(q => q.Discount).ToListAsync();
+                    foreach(var productItem in item.Products)
+                    {
+                        productItem.Items = await _context.ProductItems.Where(q => q.ProductId == productItem.Id).Include(q => q.Size).ToListAsync();
+                        
+                    }
                 }
             }
             else
@@ -135,8 +141,17 @@ namespace ShoesShop.Controllers
                 foreach (var item in categories)
                 {
                     item.Products = await _context.Products.Where(q => q.CategoryId == item.Id).Include(q => q.Discount).ToListAsync();
+                    foreach (var productItem in item.Products)
+                    {
+                        productItem.Items = await _context.ProductItems.Where(q => q.Id == productItem.Id).Include(q => q.Size).ToListAsync();
+                    }
                 }
             }
+            
+            // Get Filter 
+            var sizes = await _context.Sizes.ToListAsync();
+            TempData["Sizes"] = sizes;
+
 
             return View(categories);
         }

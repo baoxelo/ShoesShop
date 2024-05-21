@@ -73,14 +73,9 @@ input:focus {
 .dropdown-toggle {
     background-color: transparent;
 
-   
-
     &:after {
         display: none;
     }
-}
-.dropdown-menu {
-    top: calc(100% + 10px) !important;
 }
 
 /***** Accordion ****/
