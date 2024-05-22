@@ -6,7 +6,7 @@
     <partial name="_CollectionPartial"></partial>
     <div class="px-3 my-5 filter-wrapper">
         <div class="filter-icon"><span class="fa fa-filter text-body"></span> Bộ lọc</div>
-        <div class="dropdown filter-sizes">
+        <div class="dropdown ps-3 filter-sizes">
             <button class="dropdown-toggle filter-sizes-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Kích thước
             </button>
@@ -21,21 +21,34 @@
             </ul>
         </div>
 
-        <div class="dropdown filter-sizes">
+        <div class="dropdown ps-3 filter-prices">
             <button class="dropdown-toggle filter-sizes-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Giá
             </button>
-            <ul class="dropdown-menu filter-sizes-menu">
+            <ul class="dropdown-menu filter-prices-menu p-0">
                 @if (sizes != null)
                 {
-                    <li class="number-with-comma">0 - 500.000</li>
-                    <li class="number-with-comma">500.000 - 1.000.000</li>
-                    <li class="number-with-comma">1.000.000 - 1.500.000</li>
-                    <li class="number-with-comma">1.500.000 - 2.000.000</li>
+                    <li class="filter-price-option" data-price="1">0 - 500.000</li>
+                    <li class="filter-price-option" data-price="2">500.000 - 1.000.000</li>
+                    <li class="filter-price-option" data-price="3">1.000.000 - 1.500.000</li>
+                    <li class="filter-price-option" data-price="4">1.500.000 - 2.000.000</li>
                 }
             </ul>
         </div>
-
+        <div class="dropdown ms-auto filter-sort">
+            <button class="dropdown-toggle filter-sizes-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sắp xếp theo
+            </button>
+            <ul class="dropdown-menu filter-sort-menu p-0">
+                @if (sizes != null)
+                {
+                    <li class="filter-sort-option" data-sort="1">Giá: Tăng dần</li>
+                    <li class="filter-sort-option" data-sort="2">Giá: Giảm dần</li>
+                    <li class="filter-sort-option" data-sort="3">Tên: A-Z</li>
+                    <li class="filter-sort-option" data-sort="4">Tên: Z-A</li>
+                }
+            </ul>
+        </div>
         <div class="filter-active w-100"></div>
     </div>
     @if (Model != null)
@@ -54,7 +67,7 @@
             renderProduct: () => {
                 var filteredCategories = categories.map((category) => {
                     var filteredProducts = category.products.filter((product) => {
-                        return filterArray.every((filter) => {
+                        return filterSizesArray.every((filter) => {
                             return Array.isArray(product.sizes) && product.sizes.includes(filter);
                         });
                     });
@@ -67,9 +80,59 @@
                     return category.products.length > 0;
                 });
 
+
+                if (filterPricesArray.length != 0) {
+                    filteredCategories = filteredCategories.map((category) => {
+                        var jumpPrice = 500000;
+                        var filteredProducts = category.products.filter((product) => {
+                            return filterPricesArray.some((filter) => {
+                                if (product.currentPrice > (filter - 1) * jumpPrice && product.currentPrice <= filter * jumpPrice) {
+                                    return product;
+                                }
+                            });
+                        });
+                        return {
+                            name: category.name,
+                            description: category.description,
+                            products: filteredProducts
+                        };
+                    }).filter((category) => {
+                        return category.products.length > 0;
+                    })
+                };
+
+                // Sort products based on filterSort
+                console.log(filterSort)
+                switch (filterSort) {
+                    case '1':
+                        filteredCategories.forEach((category) => {
+                            category.products.sort((a, b) => a.currentPrice - b.currentPrice);
+                        });
+                        break;
+                    case '2':
+                        filteredCategories.forEach((category) => {
+                            category.products.sort((a, b) => b.currentPrice - a.currentPrice);
+                        });
+                        break;
+                    case '3':
+                        filteredCategories.forEach((category) => {
+                            category.products.sort((a, b) => a.name.localeCompare(b.name));
+                        });
+                        break;
+                    case '4':
+                        filteredCategories.forEach((category) => {
+                            category.products.sort((a, b) => b.name.localeCompare(a.name));
+                        });
+                        break;
+                    default:
+                        console.error("Invalid filterSort value");
+                        break;
+                }
+
                 $(".collection-product-wrapper").html(``);
                 filteredCategories.forEach((category) => {
                     if (category.products && category.products.length > 0) {
+                        
                         $(".collection-product-wrapper").append(`
                                 <div class="px-3">
                                     <h5 class="mb-3 category-item-title">${category.name}</h5>
@@ -112,13 +175,41 @@
             // Function to render active filters
             renderFilter: () => {
                 $('.filter-active').html(``);
-                filterArray.forEach((item) => {
+                filterSizesArray.forEach((item) => {
                     $('.filter-active').append(`
                             <div class="filter-active-item">
                                 <p>${item}</p>
-                                <span class="fa fa-times filter-remove" onClick="removeFilter('${item}')"></span>
+                                <span class="fa fa-times filter-remove" onClick="removeSizeFilter('${item}')"></span>
                             </div>
                         `);
+                });
+
+                filterPricesArray.forEach((item) => {
+                    var jump = 500000;
+                    var lowPrice = (item - 1) * jump;
+                    var highPrice = item * jump;
+                    $('.filter-active').append(`
+                            <div class="filter-active-item">
+                                <p><span class="number-with-comma">${lowPrice}</span>đ - <span class="number-with-comma">${highPrice}</span>đ</p>
+                                <span class="fa fa-times filter-remove" onClick="removePriceFilter('${item}')"></span>
+                            </div>
+                        `);
+                });
+                filterFunc.formatNumbersWithComma();
+                filterFunc.attachCarouselEvents();
+
+            },
+            attachCarouselEvents: () => {
+                $('.product-carousel-left').on('click', function () {
+                    var productCarousel = $(this).closest('.product-carousel')
+                    var width = productCarousel.find('.product-item').first().outerWidth();
+                    productCarousel.find('.product-carousel-list').animate({ scrollLeft: '-=' + width }, 400);
+                });
+
+                $('.product-carousel-right').on('click', function () {
+                    var productCarousel = $(this).closest('.product-carousel')
+                    var width = productCarousel.find('.product-item').first().outerWidth();
+                    productCarousel.find('.product-carousel-list').animate({ scrollLeft: '+=' + width }, 400);
                 });
             },
         };
@@ -149,7 +240,7 @@
                             if (item.Quantity != 0)
                             {
                                 <text>
-                                            `@item.Size.Name`,
+                                    `@item.Size.Name`,
                                 </text>
                             }
                         }
@@ -165,27 +256,55 @@
 
 
         // Initialize filter array
-        var filterArray = [];
+        var filterSizesArray = [];
+        var filterPricesArray = [];
+        var filterSort = '4';
 
         // Add event listener for filter options
         $('.filter-size-option').on('click', function () {
             var size = $(this).attr('data-size');
-            if (!filterArray.includes(size)) {
-                filterArray.push(size);
+            if (!filterSizesArray.includes(size)) {
+                filterSizesArray.push(size);
+                filterFunc.renderProduct();
+                filterFunc.renderFilter();
+            }
+        });
+
+        $('.filter-price-option').on('click', function () {
+            var size = $(this).attr('data-price');
+            if (!filterPricesArray.includes(size)) {
+                filterPricesArray.push(size);
+                filterFunc.renderProduct();
+                filterFunc.renderFilter();
+            }
+        });
+
+        $('.filter-sort-option').on('click', function () {
+            var sortValue = $(this).attr('data-sort');
+            if(filterSort != sortValue) {
+                
+                filterSort = sortValue;
+
                 filterFunc.renderProduct();
                 filterFunc.renderFilter();
             }
         });
 
         // Function to remove a filter
-        const removeFilter = (size) => {
-            filterArray = filterArray.filter((item) => {
+        const removeSizeFilter = (size) => {
+            filterSizesArray = filterSizesArray.filter((item) => {
                 return item != size;
             });
             filterFunc.renderProduct();
             filterFunc.renderFilter();
         };
-
+        const removePriceFilter = (value) => {
+            filterPricesArray = filterPricesArray.filter((item) => {
+                return item != value;
+            });
+            filterFunc.renderProduct();
+            filterFunc.renderFilter();
+        };
         // Initial render of products
         filterFunc.renderProduct(categories);
     </script>

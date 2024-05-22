@@ -6,6 +6,7 @@
 <div class="admin-body-wrapper">
     <h1>Slide</h1>
     <hr />
+    <a asp-area="Admin" asp-controller="Sliders" asp-action="Create">Tạo slide mới</a>
     @foreach(var item in Model)
     {
         <div class="row">
@@ -13,7 +14,7 @@
                 <img class="w-100" src="@item.ImageLink" />
             </div>
             <div class="col-5">
-                <div class="h1">@item.Description</div>
+                <div class="h5">@item.Description</div>
             </div>
         </div>
     }

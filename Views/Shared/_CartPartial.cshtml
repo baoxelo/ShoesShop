@@ -30,10 +30,13 @@
         {
             <button title="Giỏ hàng" class="position-relative rounded-circle h-100 w-100 border-0 dropdown-toggle p-0 @(show ? "show" : "")" type="button" id="dropdownCartToggle" data-bs-toggle="dropdown" aria-expanded="@(show ? "true" : "false")">
                 <span class="fa fa-shopping-bag text-body"></span>
-                <div class="position-absolute cartPartial-notice">
+                @if(totalCartItem != 0)
+                {
+                    <div class="position-absolute cartPartial-notice">
 
-                    @Html.DisplayFor(count => totalCartItem)
-                </div>
+                        @Html.DisplayFor(count => totalCartItem)
+                    </div>
+                }
             </button>
             <div class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end cart-partial row @(show ? "show" : "")" aria-labelledby="dropdownCartToggle" data-bs-popper="none">
                 <h6 class="text-center cartPartial-heading">Giỏ hàng</h6>

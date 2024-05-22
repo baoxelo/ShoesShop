@@ -10,7 +10,7 @@ namespace ShoesShop.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Cần thiết lập {0}")]
-        [DisplayName("Tên sản phẩm")]
+        [DisplayName("Tên slide")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Tên {0} phải có độ dài từ {2} đến {1}")]
         [Column(TypeName = "nvarchar(255)")]
         public required string Title { get; set; }
@@ -22,7 +22,7 @@ namespace ShoesShop.Models
 
         [NotMapped]
         [DataType(DataType.Upload)]
-        [DisplayName("Ảnh sản phẩm")]
+        [DisplayName("Ảnh slide")]
         public IFormFile? ImageFile { get; set; }
 
         [Column(TypeName = "nvarchar(500)")]

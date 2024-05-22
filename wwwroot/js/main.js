@@ -81,12 +81,12 @@
     });
 
     // Carosel product
-    $('.product-carousel-left').click(function () {
+    $('.product-carousel-left').on('click', function () {
         var productCarousel = $(this).closest('.product-carousel')
         var width = productCarousel.find('.product-item').first().outerWidth();
         productCarousel.find('.product-carousel-list').animate({ scrollLeft: '-=' + width }, 400);
     });
-    $('.product-carousel-right').click(function () {
+    $('.product-carousel-right').on('click', function () {
         var productCarousel = $(this).closest('.product-carousel')
         var width = productCarousel.find('.product-item').first().outerWidth();
         productCarousel.find('.product-carousel-list').animate({ scrollLeft: '+=' + width }, 400);

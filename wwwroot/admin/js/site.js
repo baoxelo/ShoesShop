@@ -24,3 +24,8 @@ var mainModule =  {
         }
     }
 };
+$('.number-with-comma').each(function () {
+    var originalNumber = $(this).text().trim();
+    var formattedNumber = numeral(originalNumber).format('0,0');
+    $(this).text(formattedNumber);
+});

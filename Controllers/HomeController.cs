@@ -83,6 +83,7 @@ namespace ShoesShop.Controllers
         }
         public async Task<IActionResult> Collection (string? category, string? gender)
         {
+
             // Load card 
             if (_context != null && _userManager != null && User != null && User.Identity.IsAuthenticated)
             {
@@ -121,6 +122,7 @@ namespace ShoesShop.Controllers
             if (categoryItem != null)
             {
                 categories = categories.Where(q => q.Slug == categoryItem.Slug).ToList();
+                
             }
 
             var genderItem = await _context.Genders.FirstOrDefaultAsync(q => q.GenderType == gender);
@@ -132,8 +134,15 @@ namespace ShoesShop.Controllers
                     foreach(var productItem in item.Products)
                     {
                         productItem.Items = await _context.ProductItems.Where(q => q.ProductId == productItem.Id).Include(q => q.Size).ToListAsync();
-                        
                     }
+                }
+                if (categoryItem != null)
+                {
+                    ViewData["Title"] = categoryItem.Name + " " + genderItem.GenderType;
+                }
+                else
+                {
+                    ViewData["Title"] = genderItem.GenderType;
                 }
             }
             else
@@ -145,6 +154,15 @@ namespace ShoesShop.Controllers
                     {
                         productItem.Items = await _context.ProductItems.Where(q => q.Id == productItem.Id).Include(q => q.Size).ToListAsync();
                     }
+
+                }
+                if (categoryItem != null)
+                {
+                    ViewData["Title"] = categoryItem.Name ;
+                }
+                else
+                {
+                    ViewData["Title"] = "Tất cả";
                 }
             }
             
@@ -152,6 +170,7 @@ namespace ShoesShop.Controllers
             var sizes = await _context.Sizes.ToListAsync();
             TempData["Sizes"] = sizes;
 
+            
 
             return View(categories);
         }

@@ -1,6 +1,6 @@
 ﻿@model ShoesShop.Areas.Admin.Models.Dashboard
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bảng điều khiển";
 }
 
     <!-- Navbar -->
@@ -248,7 +248,7 @@
                         <div class="card-header d-flex align-items-center justify-content-between pb-0">
                             <div class="card-title mb-0">
                                 <h5 class="m-0 me-2">Order Statistics</h5>
-                                <small class="text-muted">@Html.DisplayFor(model => Model.TotalIncome) Total Sales</small>
+                                <small class="text-muted"><span class="number-with-comma">@Html.DisplayFor(model => Model.TotalIncome)</span> đ Total Sales</small>
                             </div>
                             <div class="dropdown">
                                 <button class="btn p-0"

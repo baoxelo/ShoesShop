@@ -209,10 +209,10 @@ a {
 .filter-wrapper {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 .filter-wrapper .filter-icon {
   padding: 0 10px;
-  margin-right: 20px;
 }
 .filter-wrapper .filter-icon span {
   color: #ccc;
@@ -227,7 +227,7 @@ a {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.filter-wrapper .dropdown .dropdown-menu {
+.filter-wrapper .filter-sizes .filter-sizes-menu {
   min-width: 500px;
 }
 .filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option {
@@ -245,6 +245,28 @@ a {
 .filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option:active {
   background-color: #4582ec;
   color: #fff;
+}
+.filter-wrapper .filter-prices .filter-prices-menu {
+  min-width: 250px;
+}
+.filter-wrapper .filter-prices .filter-prices-menu .filter-price-option {
+  font-size: 1rem;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+.filter-wrapper .filter-prices .filter-prices-menu .filter-price-option:hover {
+  background-color: #ccc;
+}
+.filter-wrapper .filter-sort .filter-sort-menu {
+  min-width: 150px;
+}
+.filter-wrapper .filter-sort .filter-sort-menu .filter-sort-option {
+  font-size: 1rem;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+.filter-wrapper .filter-sort .filter-sort-menu .filter-sort-option:hover {
+  background-color: #ccc;
 }
 .filter-wrapper .filter-active {
   padding-top: 20px;

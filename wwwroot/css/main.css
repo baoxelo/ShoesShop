@@ -63,6 +63,7 @@ input:focus {
 
 .number-with-comma {
   letter-spacing: 0.5px;
+  cursor: text !important;
 }
 
 /*** Dropdown Bootstrap ***/
