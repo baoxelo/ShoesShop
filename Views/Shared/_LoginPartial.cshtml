@@ -32,12 +32,12 @@
             }
         </button>
         <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="dropdownAvatar">
-            <li class="dropdown-item"><a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-dark fw-medium">Tài khoản</a></li>
+            <li class="dropdown-item active-text-light"><a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-dark fw-medium active-text-light">Tài khoản</a></li>
             @if(isAdmin) {
-                <li class="dropdown-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="text-dark fw-medium">Quyền Admin</a></li>
+                <li class="dropdown-item active-text-light"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="text-dark fw-medium active-text-light">Quyền Admin</a></li>
             }
-            <li class="dropdown-item"><a asp-controller="Invoice" asp-action="Index" class="text-dark fw-medium">Đơn hàng của bạn</a></li>
-            <li class="dropdown-item">
+            <li class="dropdown-item active-text-light"><a asp-controller="Invoice" asp-action="Index" class="text-dark fw-medium">Đơn hàng của bạn</a></li>
+            <li class="dropdown-item active-text-light">
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <input id="logout" type="submit" class="text-danger border-0 w-100 bg-transparent text-start p-0 text-danger fw-medium" title="Đăng xuất" value="Đăng xuất" />
                 </form>

@@ -124,26 +124,22 @@ a {
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 0;
-    /* Thanh cuộn */
+    /* Scrollbar */
     &::-webkit-scrollbar {
-        width: 8px; /* Điều này có thể thay đổi tùy thuộc vào yêu cầu của bạn */
+        width: 8px; /* This can be adjusted based on your needs */
 
         @media (max-width: 480px) {
-            width: 0px;
+            width: 0px; /* Hide scrollbar on small screens */
         }
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #888; /* Màu sắc của thanh cuộn */
+        background-color: #888; /* Color of the scrollbar */
+        border-radius: 5px; /* Rounded corners for the scrollbar thumb */
     }
 
     &::-webkit-scrollbar-button {
-        display: none; /* Ẩn mũi tên lên và mũi tên xuống */
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #888; /* Màu sắc của thanh cuộn */
-        border-radius: 5px;
+        display: none; /* Hide the up and down arrows */
     }
 }
 .product-info-wrapper {
@@ -242,6 +238,10 @@ a {
     .dropdown {
         min-width: 150px;
 
+        @media (max-width: 480px) { // Mobile
+            min-width: 100px;
+        }
+
         .dropdown-toggle {
             width: 100%;
             background-color: $white;
@@ -254,6 +254,11 @@ a {
 
         .filter-sizes-menu {
             min-width: 500px;
+            text-align: center;
+            @media (max-width: 480px) { // Mobile
+                min-width: 250px;
+                width: 250px;
+            }
 
             .filter-size-option {
                 display: inline-block;
@@ -262,6 +267,9 @@ a {
                 line-height: 30px;
                 border: 1px solid #ccc;
                 margin: 0 7px;
+                @media (max-width: 480px) {
+                    margin: 3px 7px;
+                }
                 text-align: center;
                 border-radius: 50%;
                 user-select: none;

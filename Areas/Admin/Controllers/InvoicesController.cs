@@ -66,7 +66,7 @@ namespace ShoesShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Address,StatusId")] Invoice updateInvoice)
+        public async Task<IActionResult> Edit(int id, [Bind("Address, DateOrdered, StatusId")] Invoice updateInvoice)
         {
             var invoice = await _context.Invoices.FindAsync(id);
             if (invoice == null)
@@ -87,6 +87,7 @@ namespace ShoesShop.Areas.Admin.Controllers
                 try
                 {
                     invoice.Address = updateInvoice.Address;
+                    invoice.DateOrdered = updateInvoice.DateOrdered;
                     invoice.StatusId = updateInvoice.StatusId;
                     await _context.SaveChangesAsync();
                 }

@@ -113,25 +113,22 @@ a {
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0;
-  /* Thanh cuộn */
+  /* Scrollbar */
 }
 .product-list-images-wrapper::-webkit-scrollbar {
-  width: 8px; /* Điều này có thể thay đổi tùy thuộc vào yêu cầu của bạn */
+  width: 8px; /* This can be adjusted based on your needs */
 }
 @media (max-width: 480px) {
   .product-list-images-wrapper::-webkit-scrollbar {
-    width: 0px;
+    width: 0px; /* Hide scrollbar on small screens */
   }
 }
 .product-list-images-wrapper::-webkit-scrollbar-thumb {
-  background-color: #888; /* Màu sắc của thanh cuộn */
+  background-color: #888; /* Color of the scrollbar */
+  border-radius: 5px; /* Rounded corners for the scrollbar thumb */
 }
 .product-list-images-wrapper::-webkit-scrollbar-button {
-  display: none; /* Ẩn mũi tên lên và mũi tên xuống */
-}
-.product-list-images-wrapper::-webkit-scrollbar-thumb {
-  background-color: #888; /* Màu sắc của thanh cuộn */
-  border-radius: 5px;
+  display: none; /* Hide the up and down arrows */
 }
 
 .product-info-wrapper .product-name {
@@ -221,6 +218,11 @@ a {
 .filter-wrapper .dropdown {
   min-width: 150px;
 }
+@media (max-width: 480px) {
+  .filter-wrapper .dropdown {
+    min-width: 100px;
+  }
+}
 .filter-wrapper .dropdown .dropdown-toggle {
   width: 100%;
   background-color: #fff;
@@ -229,6 +231,13 @@ a {
 }
 .filter-wrapper .filter-sizes .filter-sizes-menu {
   min-width: 500px;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .filter-wrapper .filter-sizes .filter-sizes-menu {
+    min-width: 250px;
+    width: 250px;
+  }
 }
 .filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option {
   display: inline-block;
@@ -241,6 +250,11 @@ a {
   border-radius: 50%;
   user-select: none;
   cursor: pointer;
+}
+@media (max-width: 480px) {
+  .filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option {
+    margin: 3px 7px;
+  }
 }
 .filter-wrapper .filter-sizes .filter-sizes-menu .filter-size-option:active {
   background-color: #4582ec;

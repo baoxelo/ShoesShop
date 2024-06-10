@@ -7,6 +7,7 @@ $red: #ff0000;
 $dark: #111111;
 $white: #fff;
 
+
 .container-wrapper {
     margin-top: 140px;
     margin-bottom: 60px;
@@ -55,6 +56,12 @@ p {
         filter: brightness(0.95);
         background-color: #fff;
         cursor: pointer;
+    }
+}
+
+.active-text-light {
+    &:active  {
+        color: $light !important;
     }
 }
 input:focus {
@@ -280,6 +287,7 @@ input:focus {
 }
 
 /*** Navbar ***/
+
 .fixed-top {
     transition: .5s;
 }
@@ -292,6 +300,27 @@ input:focus {
 
 .navbar {
     background-color: #fff;
+
+    .navbar-brand {
+        height: 64px;
+        
+
+        .app-brand-logo {
+            height: 100%;
+
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        .app-brand-text {
+            font-size: 1.75rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0;
+            color: #111111;
+        }
+    }
 
     .dropdown-toggle::after {
         border: none;
