@@ -2,7 +2,6 @@
 .container-wrapper {
   margin-top: 140px;
   margin-bottom: 60px;
-  background-color: #fff;
   border-radius: 0.375rem;
 }
 @media (max-width: 1024px) {
@@ -210,6 +209,17 @@ input:focus {
   top: 50%;
   right: 0;
   transform: translate(100%, -50%);
+}
+.product-carousel .product-carousel-wrapper {
+  position: relative;
+}
+.product-carousel .product-carousel-wrapper::before {
+  display: block;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 1rem;
+  background-color: #f5f5f5;
 }
 .product-carousel .product-carousel-list {
   margin: 0;

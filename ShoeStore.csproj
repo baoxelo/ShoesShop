@@ -50,6 +50,7 @@
     <Folder Include="Areas\Identity\Pages\Account\Manage\Shared\" />
     <Folder Include="Data\Images\" />
     <Folder Include="Data\Images\" />
+    <Folder Include="Data\Images\" />
   </ItemGroup>
 
   <ItemGroup>

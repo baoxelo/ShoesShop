@@ -5,9 +5,11 @@ $dark: #111111;
 $title: #252a2b;
 $red: #ff0000;
 $white: #fff;
+$backgroundColor: #f5f5f5;
 
 html {
     font-size: 14px;
+    scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
@@ -26,7 +28,7 @@ html {
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: $backgroundColor;
 }
 
 a {

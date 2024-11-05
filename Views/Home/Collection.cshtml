@@ -134,12 +134,13 @@
                     if (category.products && category.products.length > 0) {
                         
                         $(".collection-product-wrapper").append(`
-                                <div class="px-3">
-                                    <h5 class="mb-3 category-item-title">${category.name}</h5>
-                                </div>
-                                <div class="row pb-5 product-carousel">
-                                    <button title="Sang trái" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
-                                    <button title="Sang phải" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                            <div class="px-3">
+                                <h5 class="mb-3 category-item-title">${category.name}</h5>
+                            </div>
+                            <div class="row pb-5 product-carousel">
+                                <button title="Sang trái" class="d-none d-lg-flex btn btn-square product-carousel-left"><i class="fa-solid fa-caret-left"></i></button>
+                                <button title="Sang phải" class="d-none d-lg-flex btn btn-square product-carousel-right"><i class="fa-solid fa-caret-right"></i></button>
+                                <div class="product-carousel-wrapper row">
                                     <div class="row product-carousel-list overflow-y-hidden">
                                         ${category.products.map(product => `
                                             <div class="product-item col-xl-3 col-md-4 col-6 px-1 px-md-3">
@@ -158,6 +159,7 @@
                                         `).join('')}
                                     </div>
                                 </div>
+                            </div>
                             `);
                     }
                 });
